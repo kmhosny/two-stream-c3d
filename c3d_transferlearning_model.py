@@ -8,6 +8,7 @@ from keras.models import Model
 from keras.layers import Dense, Dropout
 from keras.optimizers import SGD
 from keras.callbacks import ModelCheckpoint
+from keras.callbacks import TensorBoard
 from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
 
@@ -116,9 +117,15 @@ def main():
     model.compile(
         loss='mean_squared_error', optimizer='sgd', metrics=["accuracy"])
     filepath = "./models/c3d_1M_UCF_weights-{epoch:02d}-{val_acc:.2f}.h5"
+    log_dir = "./logs"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
-    callbacks_list = [checkpoint]
+    board = TensorBoard(
+        log_dir=log_dir,
+        write_images=True,
+        update_freq='epoch',
+        histogram_freq=1)
+    callbacks_list = [checkpoint, board]
 
     history = model.fit_generator(
         train_generator,
