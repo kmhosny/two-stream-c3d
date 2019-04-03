@@ -1,19 +1,12 @@
 #!/usr/bin/env python
 
-import matplotlib
-matplotlib.use('Agg')
 from keras.models import model_from_json
 import os
-import cv2
 import numpy as np
-import matplotlib.pyplot as plt
-import c3d_model
-import sys
 import keras.backend as K
 from keras.models import Model
-from keras.preprocessing.image import ImageDataGenerator
-from keras.layers import Dense, Activation, Flatten, Dropout
-from keras.optimizers import SGD, Adam
+from keras.layers import Dense, Dropout
+from keras.optimizers import SGD
 from keras.callbacks import ModelCheckpoint
 from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
@@ -106,9 +99,8 @@ def build_finetune_model(base_model, dropout, num_classes):
 
 def main():
     train_generator, validation_generator = init_generators()
-    model_dir = './models'
-    model_weight_filename = os.path.join(model_dir, 'sports1M_weights_tf.h5')
-    model_json_filename = os.path.join(model_dir, 'sports1M_weights_tf.json')
+    model_weight_filename = './models/sports1M_weights_tf.h5'
+    model_json_filename = './models/sports1M_weights_tf.json'
 
     print("[Info] Reading model architecture...")
     FC_LAYERS = [4096, 4096, 487]
