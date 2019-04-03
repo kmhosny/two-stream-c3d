@@ -6,10 +6,21 @@ import numpy as np
 import keras
 import input_data
 
+
 class VideoDataGenerator(keras.utils.Sequence):
     'Generates data for Keras'
-    def __init__(self, list_IDs, labels, work_directory, batch_size=16, dim=(16,112,112), n_channels=1,
-                 n_classes=10, shuffle=True, num_of_frames=16, crop_size=112):
+
+    def __init__(self,
+                 list_IDs,
+                 labels,
+                 work_directory,
+                 batch_size=16,
+                 dim=(16, 112, 112),
+                 n_channels=1,
+                 n_classes=10,
+                 shuffle=True,
+                 num_of_frames=16,
+                 crop_size=112):
         'Initialization'
         self.dim = dim
         self.batch_size = batch_size
@@ -30,7 +41,8 @@ class VideoDataGenerator(keras.utils.Sequence):
     def __getitem__(self, index):
         'Generate one batch of data'
         # Generate indexes of the batch
-        indexes = self.indexes[index*self.batch_size:(index+1)*self.batch_size]
+        indexes = self.indexes[index * self.batch_size:(index + 1) *
+                               self.batch_size]
 
         # Find list of IDs
         list_IDs_temp = [self.list_IDs[k] for k in indexes]
@@ -47,14 +59,15 @@ class VideoDataGenerator(keras.utils.Sequence):
             np.random.shuffle(self.indexes)
 
     def __data_generation(self, list_IDs_temp):
-        'Generates data containing batch_size samples' # X : (n_samples, *dim, n_channels)
+        'Generates data containing batch_size samples'  # X : (n_samples, *dim, n_channels)
         # Initialization
         X = np.empty((self.batch_size, *self.dim, self.n_channels))
         y = np.empty((self.batch_size), dtype=int)
         # Generate data
         for i, ID in enumerate(list_IDs_temp):
             # Store sample
-            X[i,] = input_data.get_frames_data(self.work_directory+ID, self.num_of_frames, self.crop_size)
+            X[i, ] = input_data.get_frames_data(
+                self.work_directory + ID, self.num_of_frames, self.crop_size)
 
             # Store class
             y[i] = self.labels[ID]
