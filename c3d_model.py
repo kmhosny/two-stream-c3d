@@ -7,9 +7,10 @@ from keras.optimizers import SGD
 dim_ordering issue:
 - 'th'-style dim_ordering: [batch, channels, depth, height, width]
 - 'tf'-style dim_ordering: [batch, depth, height, width, channels]
+- 'classes'-number of classes in the last layer, default is sports1m
 '''
 
-def get_model(summary=False, backend='tf'):
+def get_model(summary=False, backend='tf', classes = 487):
     """ Return the Keras model of the network
     """
     model = Sequential()
@@ -55,7 +56,7 @@ def get_model(summary=False, backend='tf'):
     model.add(Dropout(.5))
     model.add(Dense(4096, activation='relu', name='fc7'))
     model.add(Dropout(.5))
-    model.add(Dense(487, activation='softmax', name='fc8'))
+    model.add(Dense(classes, activation='softmax', name='fc8'))
 
     if summary:
         print(model.summary())

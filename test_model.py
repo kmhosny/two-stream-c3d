@@ -10,10 +10,14 @@ import matplotlib.pyplot as plt
 import c3d_model
 import sys
 import keras.backend as K
+from  keras.models import Model
 dim_ordering = K.image_dim_ordering()
-print "[Info] image_dim_order (from default ~/.keras/keras.json)={}".format(
-        dim_ordering)
+print("[Info] image_dim_order (from default ~/.keras/keras.json)={}".format(
+        dim_ordering))
 backend = dim_ordering
+
+h5model = 'sports1M_ucf_finetune_weights_tf.h5'
+jsonmodel = 'sports1M_ucf_finetune_weights_tf.json'
 
 def diagnose(data, verbose=True, label='input', plots=False, backend='tf'):
     # Convolution3D?
@@ -25,8 +29,8 @@ def diagnose(data, verbose=True, label='input', plots=False, backend='tf'):
         min_num_spatial_axes = 10
         max_outputs_to_show = 3
         ndim = data.ndim
-        print "[Info] {}.ndim={}".format(label, ndim)
-        print "[Info] {}.shape={}".format(label, data.shape)
+        print("[Info] {}.ndim={}".format(label, ndim))
+        print("[Info] {}.shape={}".format(label, data.shape))
         for d in range(ndim):
             num_this_dim = data.shape[d]
             if num_this_dim >= min_num_spatial_axes: # check for spatial axes
@@ -73,7 +77,7 @@ def diagnose(data, verbose=True, label='input', plots=False, backend='tf'):
                     if im_max > im_min:
                         im_std = (im - im_min) / (im_max - im_min)
                     else:
-                        print "[Warning] image is constant!"
+                        print("[Warning] image is constant!")
                         im_std = np.zeros_like(im)
                     plt.imshow(im_std)
                     plt.axis('off')
@@ -93,7 +97,7 @@ def diagnose(data, verbose=True, label='input', plots=False, backend='tf'):
                         if im_max > im_min:
                             im_std = (im - im_min) / (im_max - im_min)
                         else:
-                            print "[Warning] image is constant!"
+                            print("[Warning] image is constant!")
                             im_std = np.zeros_like(im)
                         plt.imshow(im_std)
                         plt.axis('off')
@@ -123,14 +127,14 @@ def main():
             backend = 'tf'
         else:
             backend = 'th'
-    print "[Info] Using backend={}".format(backend)
+    print("[Info] Using backend={}".format(backend))
 
     if backend == 'th':
         model_weight_filename = os.path.join(model_dir, 'sports1M_weights_th.h5')
         model_json_filename = os.path.join(model_dir, 'sports1M_weights_th.json')
     else:
-        model_weight_filename = os.path.join(model_dir, 'sports1M_weights_tf.h5')
-        model_json_filename = os.path.join(model_dir, 'sports1M_weights_tf.json')
+        model_weight_filename = os.path.join(model_dir, h5model)
+        model_json_filename = os.path.join(model_dir, jsonmodel)
 
     print("[Info] Reading model architecture...")
     model = model_from_json(open(model_json_filename, 'r').read())
@@ -169,7 +173,9 @@ def main():
     # sample 16-frame clip
     #start_frame = 100
     start_frame = 2000
+    print(vid.shape)
     X = vid[start_frame:(start_frame + 16), :, :, :]
+    print(X.shape)
     #diagnose(X, verbose=True, label='X (16-frame clip)', plots=show_images)
 
     # subtract mean
@@ -181,6 +187,7 @@ def main():
 
     # center crop
     X = X[:, 8:120, 30:142, :] # (l, h, w, c)
+    print(X.shape)
     #diagnose(X, verbose=True, label='Center-cropped X', plots=show_images)
 
     if backend == 'th':
@@ -197,7 +204,7 @@ def main():
         int_model = c3d_model.get_int_model(model=model, layer=layer, backend=backend)
         int_output = int_model.predict_on_batch(np.array([X]))
         int_output = int_output[0, ...]
-        print "[Debug] at layer={}: output.shape={}".format(layer, int_output.shape)
+        print("[Debug] at layer={}: output.shape={}".format(layer, int_output.shape))
         diagnose(int_output,
                  verbose=True,
                  label='{} activation'.format(layer),
@@ -205,7 +212,13 @@ def main():
                  backend=backend)
 
     # inference
+    print(model.summary())
+    intermediate_layer_model = Model(inputs=model.input,
+                                     outputs=model.get_layer(name='pool5').output)
+    intermediate_output = intermediate_layer_model.predict(np.array([X]))
+    print("before prediction", np.array([X]).shape)
     output = model.predict_on_batch(np.array([X]))
+    print(intermediate_output.shape)
 
     # show results
     print('Saving class probabilitities in probabilities.png')
