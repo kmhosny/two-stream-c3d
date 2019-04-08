@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 
-from keras.models import model_from_json
 import os
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";
+# The GPU id to use, usually either "0" or "1";
+os.environ["CUDA_VISIBLE_DEVICES"]="3"; 
 import numpy as np
 import keras.backend as K
+from keras.models import model_from_json
 from keras.models import Model
 from keras.layers import Dense, Dropout
 from keras.optimizers import SGD
@@ -17,12 +20,12 @@ print("[Info] image_dim_order (from default ~/.keras/keras.json)={}".format(
     dim_ordering))
 backend = dim_ordering
 
-WORK_DIR = '/media/kmhosny/01CFE6D64EF8ED00/datasets/UCF-101-2/'
-TRAIN_SPLIT_FILE = '/media/kmhosny/01CFE6D64EF8ED00/datasets/ucfTrainTestlist/trainlist01.txt'
-TEST_SPLIT_FILE = '/media/kmhosny/01CFE6D64EF8ED00/datasets/ucfTrainTestlist/testlist01.txt'
+WORK_DIR = '/home/kmhosny/datasets/UCF-101/'
+TRAIN_SPLIT_FILE = '/home/kmhosny/datasets/ucfTrainTestlist/trainlist01.txt'
+TEST_SPLIT_FILE = '/home/kmhosny/datasets/ucfTrainTestlist/testlist01.txt'
 CROP_SIZE = 112
 BATCH_SIZE = 16
-NUM_EPOCHS = 1
+NUM_EPOCHS = 100
 BATCH_SIZE = 16
 num_of_frames = 16
 
@@ -89,17 +92,18 @@ def init_generators():
 
 
 def build_finetune_model(base_model, dropout, num_classes):
-    for layer in base_model.layers:
+    total_layers_len = len(base_model.layers)
+    for layer in base_model.layers[:total_layers_len-1]:
         layer.trainable = False
-    base_model.pop()
-    base_model.add(Dense(num_classes, activation='softmax', name='prediction'))
+#    base_model.pop()
+ #   base_model.add(Dense(num_classes, activation='softmax', name='prediction'))
     return base_model
 
 
 def main():
     train_generator, validation_generator = init_generators()
-    model_weight_filename = './models/sports1M_weights_tf.h5'
-    model_json_filename = './models/sports1M_weights_tf.json'
+    model_weight_filename = './models/c3d_1M_UCF_weights-10-0.89.h5'
+    model_json_filename = './models/c3d_ucf101_finetune_whole_iter_20000_tf.json'
 
     print("[Info] Reading model architecture...")
     FC_LAYERS = [4096, 4096, 487]
@@ -114,7 +118,7 @@ def main():
     print("[Info] Loading model weights -- DONE!")
     model.compile(
         loss='mean_squared_error', optimizer='sgd', metrics=["accuracy"])
-    filepath = "./models/c3d_1M_UCF_weights-{epoch:02d}-{val_acc:.2f}.h5"
+    filepath = "./models/c3d_UCF_finetune_weights-{epoch:02d}-{val_acc:.2f}.h5"
     log_dir = "./logs"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
@@ -122,7 +126,7 @@ def main():
         log_dir=log_dir,
         write_images=True,
         update_freq='epoch',
-        histogram_freq=1)
+        histogram_freq=0)
     callbacks_list = [checkpoint, board]
 
     history = model.fit_generator(
