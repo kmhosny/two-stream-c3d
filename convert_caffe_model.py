@@ -5,6 +5,13 @@ import caffe_pb2 as caffe
 import numpy as np
 import h5py
 import os
+import os
+os.environ["CUDA_DEVICE_ORDER"]="PCI_BUS_ID";
+ 
+# The GPU id to use, usually either "0" or "1";
+os.environ["CUDA_VISIBLE_DEVICES"]="3";  
+ 
+# Do other imports now...
 
 def reindex(x):
     # https://github.com/fchollet/keras/blob/master/keras/utils/np_utils.py#L90-L115
@@ -48,17 +55,17 @@ def main():
             dim_ordering))
 
     # get C3D model placeholder
-    model = c3d_model.get_model(summary=True, backend=dim_ordering)
+    model = c3d_model.get_model(summary=True, backend=dim_ordering, classes=101)
 
     # input caffe model
-    caffe_model_filename = './models/conv3d_deepnetA_sport1m_iter_1900000'
+    caffe_model_filename = './models/c3d_ucf101_finetune_whole_iter_20000'
 
     # output dir/files
     model_dir = './models'
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
-    output_model_filename = os.path.join(model_dir, 'sports1M_weights_{}.h5'.format(dim_ordering))
-    output_json_filename = os.path.join(model_dir, 'sports1M_weights_{}.json'.format(dim_ordering))
+    output_model_filename = os.path.join(model_dir, 'c3d_ucf101_finetune_whole_iter_20000_{}.h5'.format(dim_ordering))
+    output_json_filename = os.path.join(model_dir, 'c3d_ucf101_finetune_whole_iter_20000_{}.json'.format(dim_ordering))
 
     # read caffe model
     print("-" * 19)
