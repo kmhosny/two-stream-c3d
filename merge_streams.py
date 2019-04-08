@@ -1,25 +1,86 @@
 import keras.backend as K
 from keras.models import Model
 import numpy as np
-
+from feature_data_generator import FeatureDataGenerator
 NUM_OF_CLASSES = 101
 BATCH_SIZE = 16
 NUM_EPOCHS = 100
-TRAIN_SPLIT_FILE = [
-    './datasets/UCF-101/trainlist01-static-features.txt',
-    './datasets/UCF-101/trainlist01-c3d-features.txt'
-]
-TEST_SPLIT_FILE = [
-    './datasets/UCF-101/testlist01-static-features.txt',
-    './datasets/UCF-101/testlist01-c3d-features.txt'
-]
+TRAIN_SPLIT_FILE = './datasets/UCF-101/trainlist01.txt'
+TEST_SPLIT_FILE = './datasets/UCF-101/testlist01.txt'
 
 
 def avg(ve1, ve2):
     return (ve1 + ve2) * 0.5
 
 
+def read_file_ids(filename):
+    f = open(filename, 'r')
+    lines = list(f)
+    its = range(len(lines))
+    IDs = []
+    labels = {}
+    for it in its:
+        line = lines[it].strip('\n').split()
+        dirname = line[0]
+        label = line[1]
+        IDs.append(dirname)
+        labels[dirname] = int(label) - 1
+    f.close()
+    print("Found %i files belonging to %i classes" %
+          (len(IDs), len(set(labels.values()))))
+    return IDs, labels
+
+
+def split_train_validation(IDs, labels):
+    train_ids, validation_ids, _, _ = train_test_split(
+        IDs,
+        list(labels.keys()),
+        test_size=0.20,
+        random_state=len(set(labels.values())))
+
+    train_labels = {}
+    for label in train_ids:
+        train_labels[label] = labels[label]
+
+    validation_labels = {}
+    for label in validation_ids:
+        validation_labels[label] = labels[label]
+
+    return train_ids, train_labels, validation_ids, validation_labels
+
+
+def init_generators():
+    ids, labels = read_file_ids(TRAIN_SPLIT_FILE)
+    train_ids, train_labels, validation_ids, validation_labels = split_train_validation(
+        ids, labels)
+
+    train_datagen = FeatureDataGenerator(
+        list_IDs=train_ids,
+        labels=train_labels,
+        crop_size=CROP_SIZE,
+        batch_size=BATCH_SIZE,
+        work_directory=WORK_DIR,
+        fusion_method=merge_streams_output,
+        fusion_technique=0,
+        n_channels=3,
+        n_classes=len(set(train_labels.values())))
+
+    validation_datagen = FeatureDataGenerator(
+        list_IDs=validation_ids,
+        labels=validation_labels,
+        crop_size=CROP_SIZE,
+        batch_size=BATCH_SIZE,
+        work_directory=WORK_DIR,
+        fusion_method=merge_streams_output,
+        fusion_technique=0,
+        n_channels=3,
+        n_classes=len(set(train_labels.values())))
+
+    return train_datagen, validation_datagen
+
+
 def deep_model():
+    train_generator, validation_generator = init_generators()
     model = Sequential()
     model.add(Dense(200, activation='relu', input_dim=NUM_OF_CLASSES))
     model.add(Dropout(0.5))
@@ -41,11 +102,13 @@ merge_technique = {0: vec_avg}
 
 
 def main():
-    a = np.array([2, 3, 4])
-    b = np.array([4, 5, 6])
-    print(merge_streams_output(a, b, 0))
+
     model = deep_model()
-    model.fit(x_train, y_train, epochs=NUM_EPOCHS, batch_size=BATCH_SIZE)
+    model.fit(
+        train_generator,
+        validation_data=validation_generator,
+        epochs=NUM_EPOCHS,
+        batch_size=BATCH_SIZE)
 
 
 if __name__ == '__main__':
