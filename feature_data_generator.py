@@ -14,6 +14,8 @@ class FeatureDataGenerator(keras.utils.Sequence):
                  list_IDs,
                  labels,
                  work_directory,
+                 fusion_method,
+                 fusion_technique,
                  batch_size=16,
                  dim=(101),
                  n_channels=1,
@@ -28,6 +30,8 @@ class FeatureDataGenerator(keras.utils.Sequence):
         self.n_classes = n_classes
         self.shuffle = shuffle
         self.work_directory = work_directory
+        self.fusion_method = fusion_method
+        self.fusion_technique = fusion_technique
         self.on_epoch_end()
 
     def __len__(self):
@@ -61,8 +65,10 @@ class FeatureDataGenerator(keras.utils.Sequence):
         y = np.empty((self.batch_size), dtype=int)
         # Generate data
         for i, ID in enumerate(list_IDs_temp):
+            static = np.load(work_directory + ID + '_static.npy')
+            c3d = np.load(work_directory + ID + '_c3d.npy')
             # Store sample
-            X[i, ] = np.load(work_directory + ID + '.npy')
+            X[i, ] = self.fusion_method(static, c3d, self.fusion_technique)
 
             # Store class
             y[i] = self.labels[ID]
