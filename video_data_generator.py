@@ -66,6 +66,7 @@ class VideoDataGenerator(keras.utils.Sequence):
         # Generate data
         for i, ID in enumerate(list_IDs_temp):
             # Store sample
+            print(ID)
             X[i, ] = input_data.get_frames_data(
                 self.work_directory + ID, self.num_of_frames, self.crop_size)
 
