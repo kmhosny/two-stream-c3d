@@ -8,13 +8,16 @@ import numpy as np
 import cv2
 
 
-def get_frames_data(filename, num_frames_per_clip=16, crop_size=112):
+def get_frames_data(filename,
+                    num_frames_per_clip=16,
+                    crop_size=112,
+                    mean_frames_per_clip=16):
     ''' Given a directory containing extracted frames, return a video clip of
   (num_frames_per_clip) consecutive frames as a list of np arrays '''
     ret_arr = []
     s_index = 0
     np_mean = np.load('crop_mean.npy').reshape(
-        [num_frames_per_clip, crop_size, crop_size, 3])
+        [mean_frames_per_clip, crop_size, crop_size, 3])
     for parent, dirnames, filenames in os.walk(filename):
         total_files = len(filenames)
         if (total_files < num_frames_per_clip):
