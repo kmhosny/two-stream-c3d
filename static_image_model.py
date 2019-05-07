@@ -8,6 +8,7 @@ from keras.callbacks import TensorBoard
 from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
+import matplotlib.pyplot as plt
 
 WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
