@@ -15,7 +15,7 @@ TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
 CROP_SIZE = 112
 BATCH_SIZE = 16
-NUM_EPOCHS = 100
+NUM_EPOCHS = 500
 DIM = (112, 112)
 
 
@@ -154,6 +154,7 @@ def main():
     history = finetune_model.fit_generator(
         train_data,
         epochs=NUM_EPOCHS,
+        steps_per_epoch=500,
         workers=2,
         shuffle=True,
         callbacks=callbacks_list)
