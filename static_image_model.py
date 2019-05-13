@@ -143,7 +143,7 @@ def main():
     filepath = "./models/static-resnet-{epoch:02d}-{val_acc:.2f}.h5"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
-    log_dir = "./logs"
+    log_dir = "./logs/static_model/"
     board = TensorBoard(
         log_dir=log_dir,
         write_images=True,
