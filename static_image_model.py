@@ -56,32 +56,34 @@ def split_train_validation(IDs, labels):
 
 
 def init_generators():
-    ids, labels = read_file_ids(TRAIN_SPLIT_FILE)
-    train_ids, train_labels, validation_ids, validation_labels = split_train_validation(
-        ids, labels)
-
-    train_datagen = VideoDataGenerator(
-        list_IDs=train_ids,
-        labels=train_labels,
-        crop_size=CROP_SIZE,
-        batch_size=BATCH_SIZE,
-        dim=DIM,
-        work_directory=WORK_DIR,
-        n_channels=3,
-        num_of_frames=1,
-        n_classes=len(set(train_labels.values())))
-
-    validation_datagen = VideoDataGenerator(
-        list_IDs=validation_ids,
-        labels=validation_labels,
-        crop_size=CROP_SIZE,
-        batch_size=BATCH_SIZE,
-        dim=DIM,
-        work_directory=WORK_DIR,
-        n_channels=3,
-        num_of_frames=1,
-        n_classes=len(set(train_labels.values())))
-    return train_datagen, validation_datagen
+    # ids, labels = read_file_ids(TRAIN_SPLIT_FILE)
+    # train_ids, train_labels, validation_ids, validation_labels = split_train_validation(
+    #     ids, labels)
+    #
+    # train_datagen = VideoDataGenerator(
+    #     list_IDs=train_ids,
+    #     labels=train_labels,
+    #     crop_size=CROP_SIZE,
+    #     batch_size=BATCH_SIZE,
+    #     dim=DIM,
+    #     work_directory=WORK_DIR,
+    #     n_channels=3,
+    #     num_of_frames=1,
+    #     n_classes=len(set(train_labels.values())))
+    #
+    # validation_datagen = VideoDataGenerator(
+    #     list_IDs=validation_ids,
+    #     labels=validation_labels,
+    #     crop_size=CROP_SIZE,
+    #     batch_size=BATCH_SIZE,
+    #     dim=DIM,
+    #     work_directory=WORK_DIR,
+    #     n_channels=3,
+    #     num_of_frames=1,
+    #     n_classes=len(set(train_labels.values())))
+    train_datagen = ImageDataGenerator(validation_split=0.2)
+    #return train_datagen, validation_datagen
+    return train_datagen
 
 
 def build_finetune_model(base_model, dropout, num_classes):
@@ -120,7 +122,13 @@ def plot_training(history):
 
 
 def main():
-    train_generator, validation_generator = init_generators()
+    #train_generator, validation_generator = init_generators()
+    train_generator = init_generators()
+    train_data = train_generator.flow_from_directory(
+        WORK_DIR,
+        target_size=DIM,
+        batch_size=BATCH_SIZE,
+        class_mode="categorical")
     base_model = ResNet50(
         weights='imagenet',
         include_top=False,
@@ -144,8 +152,7 @@ def main():
     callbacks_list = [checkpoint, board]
 
     history = finetune_model.fit_generator(
-        train_generator,
-        validation_data=validation_generator,
+        train_data,
         epochs=NUM_EPOCHS,
         workers=2,
         shuffle=True,
