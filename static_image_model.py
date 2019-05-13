@@ -143,7 +143,7 @@ def main():
         base_model, dropout=0.5, num_classes=101)
 
     finetune_model.compile(
-        optimizer='sgd', loss='mean_squared_error', metrics=['accuracy'])
+        optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
 
     filepath = "./models/static-resnet-{epoch:02d}-{val_acc:.2f}.h5"
     checkpoint = ModelCheckpoint(
