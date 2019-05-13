@@ -98,6 +98,7 @@ def build_finetune_model(base_model, dropout, num_classes):
     x = base_model.output
     x = GlobalAveragePooling2D()(x)
     x = Dense(1000, activation='relu')(x)
+    x = Dense(1000, activation='relu')(x)
     predictions = Dense(num_classes, activation='softmax')(x)
 
     finetune_model = Model(inputs=base_model.input, outputs=predictions)
