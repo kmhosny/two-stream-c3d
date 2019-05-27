@@ -1,7 +1,7 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 # The GPU id to use, usually either "0" or "1";
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 from keras.preprocessing.image import ImageDataGenerator
 from keras.layers import Dense, Activation, Flatten, Dropout, GlobalAveragePooling2D
@@ -19,7 +19,7 @@ WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
 CROP_SIZE = 112
-BATCH_SIZE = 16
+BATCH_SIZE = 100
 NUM_EPOCHS = 500
 DIM = (112, 112)
 
@@ -94,15 +94,13 @@ def init_generators():
 def build_finetune_model(base_model, dropout, num_classes):
     for layer in base_model.layers:
         layer.trainable = False
-
+    base_model.summary()
     x = base_model.output
-    x = GlobalAveragePooling2D()(x)
-    x = Dense(1000, activation='relu')(x)
-    x = Dense(1000, activation='relu')(x)
+    x = Flatten(name='flatten')(x)
     predictions = Dense(num_classes, activation='softmax')(x)
 
     finetune_model = Model(inputs=base_model.input, outputs=predictions)
-
+    print(finetune_model.summary())
     return finetune_model
 
 
@@ -137,8 +135,9 @@ def main():
         class_mode="categorical")
     base_model = ResNet50(
         weights='imagenet',
-        include_top=False,
-        input_shape=(CROP_SIZE, CROP_SIZE, 3))
+        include_top=False ,
+        input_shape=(CROP_SIZE, CROP_SIZE, 3)
+	)
 
     finetune_model = build_finetune_model(
         base_model, dropout=0.5, num_classes=101)
@@ -146,7 +145,7 @@ def main():
     finetune_model.compile(
         optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
 
-    filepath = "./models/static-resnet-{epoch:02d}-{val_acc:.2f}.h5"
+    filepath = "./models/static-resnet-{epoch:02d}-{acc:.2f}.h5"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     log_dir = "./logs/static_model/"
