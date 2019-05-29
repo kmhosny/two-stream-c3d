@@ -80,12 +80,13 @@ def main():
     finetune_model = build_finetune_model(
         base_model, dropout=0.5, num_classes=101)
 
-    model_weight_filename = './models/static_model_resnet-99-0.94.h5'
+    model_weight_filename = './models/static-resnet-500-0.94.h5'
     print("[Info] Reading model architecture...")
     finetune_model.load_weights(model_weight_filename)
 
     print("[Info] Loading model weights -- DONE!")
-
+    finetune_model.compile(
+        optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
     for tid in test_ids:
         directory = WORK_DIR + "" + tid
         test_data = test_generator.flow_from_directory(
