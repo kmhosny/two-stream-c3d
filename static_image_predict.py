@@ -14,6 +14,9 @@ from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
 import matplotlib.pyplot as plt
+import PIL.Image as Image
+import cv2
+import random
 
 WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
@@ -89,17 +92,21 @@ def main():
         optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
     for tid in test_ids:
         directory = WORK_DIR + "" + tid
-        test_data = test_generator.flow_from_directory(
-            directory,
-            target_size=DIM,
-            batch_size=BATCH_SIZE,
-            class_mode="categorical")
-        result = finetune_model.evaluate_generator(
-            generator=test_data,
-            steps=10,
-            workers=1,
-            use_multiprocessing=False,
-            verbose=1)
+        filenames = os.listdir(directory)
+        total_files = len(filenames)
+        predict_on_file = WORK_DIR + "" + tid + "/" + filenames[random.randint(
+            0, total_files - 1)]
+        print(predict_on_file)
+        img = Image.open(predict_on_file)
+        if (img.width > img.height):
+            scale = float(crop_size) / float(img.height)
+            img = cv2.resize(img, (int(img.width * scale + 1), CROP_SIZE))
+        else:
+            scale = float(crop_size) / float(img.width)
+            img = cv2.resize(img, (CROP_SIZE, int(img.height * scale + 1)))
+        img_np_array = np.array(img)
+        result = finetune_model.predict(img_np_array, verbose=1)
+        print(result)
         prediction_classes = []
         for single_prediction in result:
             prediction_classes.append(np.argmax(single_prediction))
