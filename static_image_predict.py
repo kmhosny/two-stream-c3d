@@ -95,7 +95,7 @@ def main():
             batch_size=BATCH_SIZE,
             class_mode="categorical")
         result = finetune_model.evaluate_generator(
-            generator=test_generator,
+            generator=test_data,
             steps=10,
             workers=1,
             use_multiprocessing=False,
