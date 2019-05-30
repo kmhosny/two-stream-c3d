@@ -99,10 +99,10 @@ def main():
         print(predict_on_file)
         img = Image.open(predict_on_file)
         if (img.width > img.height):
-            scale = float(crop_size) / float(img.height)
+            scale = float(CROP_SIZE) / float(img.height)
             img = cv2.resize(img, (int(img.width * scale + 1), CROP_SIZE))
         else:
-            scale = float(crop_size) / float(img.width)
+            scale = float(CROP_SIZE) / float(img.width)
             img = cv2.resize(img, (CROP_SIZE, int(img.height * scale + 1)))
         img_np_array = np.array(img)
         result = finetune_model.predict(img_np_array, verbose=1)
