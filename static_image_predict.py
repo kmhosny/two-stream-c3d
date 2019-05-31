@@ -99,15 +99,10 @@ def main():
             0, total_files - 1)]
         print(predict_on_file)
         img = Image.open(predict_on_file)
-        if (img.width > img.height):
-            scale = float(CROP_SIZE) / float(img.height)
-            img = cv2.resize(
-                np.array(img), (int(img.width * scale + 1), CROP_SIZE))
-        else:
-            scale = float(CROP_SIZE) / float(img.width)
-            img = cv2.resize(
-                np.arra(img), (CROP_SIZE, int(img.height * scale + 1)))
-        img_np_array = np.array(img)
+        img = cv2.resize(np.array(img), (CROP_SIZE, CROP_SIZE))
+        input = []
+        input.append(np.array(img))
+        img_np_array = np.array(input)
         result = finetune_model.predict(img_np_array, verbose=1)
         print(result)
         prediction_classes = []
