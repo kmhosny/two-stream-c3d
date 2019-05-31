@@ -108,7 +108,7 @@ def main():
         prediction_classes = []
         for single_prediction in result:
             prediction_classes.append(np.argmax(single_prediction))
-        print("result: ", result, model.metrics_names)
+        print("result: ", result, finetune_model.metrics_names)
 
 
 if __name__ == '__main__':
