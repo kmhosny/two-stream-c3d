@@ -91,24 +91,35 @@ def main():
     print("[Info] Loading model weights -- DONE!")
     finetune_model.compile(
         optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
+    prediction_classes = []
+    miss = 0
+    hit = 0
+    total = len(test_ids)
     for tid in test_ids:
         directory = WORK_DIR + "" + tid
         filenames = os.listdir(directory)
         total_files = len(filenames)
         predict_on_file = WORK_DIR + "" + tid + "/" + filenames[random.randint(
             0, total_files - 1)]
-        print(predict_on_file)
         img = Image.open(predict_on_file)
         img = cv2.resize(np.array(img), (CROP_SIZE, CROP_SIZE))
         input = []
         input.append(np.array(img))
         img_np_array = np.array(input)
         result = finetune_model.predict(img_np_array, verbose=1)
-        print(result)
-        prediction_classes = []
-        for single_prediction in result:
-            prediction_classes.append(np.argmax(single_prediction))
-        print("result: ", result, finetune_model.metrics_names)
+        index = np.argmax(result)
+        cl = ""
+        for klass, kindex in class_maping.items():
+            if index == kindex:
+                cl = klass
+        if labels[tid] == class_maping[cl]:
+            hit = hit + 1
+        else:
+            miss = miss + 1
+        prediction_classes.append([predict_on_file, index, cl])
+    acc = (hit * 100) / total
+    loss = (miss * 100) / total
+    print("result: ", hit, miss, total, acc, loss)
 
 
 if __name__ == '__main__':
