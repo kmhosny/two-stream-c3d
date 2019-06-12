@@ -15,6 +15,7 @@ from keras.callbacks import TensorBoard
 from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
+import input_data
 
 WORK_DIR = cfg['WORK_DIR']
 CLASS_IND = cfg['CLASS_IND']
@@ -23,7 +24,9 @@ CROP_SIZE = 112
 BATCH_SIZE = 16
 NUM_EPOCHS = 100
 BATCH_SIZE = 16
-num_of_frames = 16
+NUMBER_OF_FRAMES = 16
+MODEL_WEIGHT_FILENAME = './models/c3d_UCF_finetune_weights-99-0.94.h5'
+MODEL_JSON_FILENAME = './models/c3d_ucf101_finetune_whole_iter_20000_tf.json'
 
 
 def read_test_ids():
@@ -54,6 +57,41 @@ def read_test_ids():
     return IDs, labels, class_maping
 
 
+def predict_intermediate_output(path):
+    model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
+
+    print("[Info] Loading model weights...")
+    model.load_weights(MODEL_WEIGHT_FILENAME)
+
+    print("[Info] Loading model weights -- DONE!")
+    model.compile(
+        loss='mean_squared_error', optimizer='sgd', metrics=["accuracy"])
+    img_np_array = []
+    img_np_array.append(
+        input_data.get_frames_data(path, NUMBER_OF_FRAMES, CROP_SIZE))
+    img_np_array = np.array(img_np_array)
+    #intermediate_model = Model(
+    #    input=model.input, output=model.get_layer("fc7").output)
+
+    #intermediate_model.summary()
+    intermediate_output = model.predict(img_np_array)
+    K.clear_session()
+    return intermediate_output
+
+
+def get_model():
+    model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
+
+    print("[Info] Loading model weights...")
+    model.load_weights(MODEL_WEIGHT_FILENAME)
+
+    print("[Info] Loading model weights -- DONE!")
+    model.compile(
+        loss='mean_squared_error', optimizer='sgd', metrics=["accuracy"])
+    model._make_predict_function()
+    return model
+
+
 def init_test_generator():
     ids, ground_truth, class_maping = read_test_ids()
 
@@ -69,18 +107,30 @@ def init_test_generator():
     return test_datagen
 
 
+class C3dModel:
+    def __init__(self):
+        self.model = get_model()
+
+    def predict(self, path):
+        img_np_array = []
+        img_np_array.append(
+            input_data.get_frames_data(path, NUMBER_OF_FRAMES, CROP_SIZE))
+        img_np_array = np.array(img_np_array)
+        intermediate_output = self.model.predict(img_np_array)
+        K.clear_session()
+        return intermediate_output
+
+
 def main():
     test_generator = init_test_generator()
-    model_weight_filename = './models/c3d_UCF_finetune_weights-99-0.94.h5'
-    model_json_filename = './models/c3d_ucf101_finetune_whole_iter_20000_tf.json'
 
     print("[Info] Reading model architecture...")
     FC_LAYERS = [4096, 4096, 487]
-    print(model_weight_filename, model_json_filename)
-    model = model_from_json(open(model_json_filename, 'r').read())
+    print(MODEL_WEIGHT_FILENAME, MODEL_JSON_FILENAME)
+    model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
 
     print("[Info] Loading model weights...")
-    model.load_weights(model_weight_filename)
+    model.load_weights(MODEL_WEIGHT_FILENAME)
 
     print("[Info] Loading model weights -- DONE!")
     model.compile(
@@ -103,7 +153,6 @@ def main():
     prediction_classes = []
     for single_prediction in result:
         prediction_classes.append(np.argmax(single_prediction))
-
 
     print("result: ", result, model.metrics_names)
 

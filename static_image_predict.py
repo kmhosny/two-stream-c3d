@@ -18,6 +18,7 @@ import PIL.Image as Image
 import cv2
 import random
 import numpy as np
+from keras import backend as bkend
 
 WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
@@ -73,6 +74,76 @@ def build_finetune_model(base_model, dropout, num_classes):
     return finetune_model
 
 
+def predict_intermediate_output(path):
+    img_np_array = read_img(path)
+    base_model = ResNet50(
+        weights='imagenet',
+        include_top=False,
+        input_shape=(CROP_SIZE, CROP_SIZE, 3))
+    finetune_model = build_finetune_model(
+        base_model, dropout=0.5, num_classes=101)
+
+    model_weight_filename = './models/static-resnet-500-0.94.h5'
+    print("[Info] Reading model architecture...")
+    finetune_model.load_weights(model_weight_filename)
+
+    print("[Info] Loading model weights -- DONE!")
+    finetune_model.compile(
+        optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
+
+    #intermediate_model = Model(
+    #    input=finetune_model.input,
+    #    output=finetune_model.get_layer("flatten").output)
+    #intermediate_model.summary()
+    intermediate_output = finetune_model.predict(img_np_array)
+    bkend.clear_session()
+    return intermediate_output
+
+
+def get_model():
+    base_model = ResNet50(
+        weights='imagenet',
+        include_top=False,
+        input_shape=(CROP_SIZE, CROP_SIZE, 3))
+    finetune_model = build_finetune_model(
+        base_model, dropout=0.5, num_classes=101)
+
+    model_weight_filename = './models/static-resnet-500-0.94.h5'
+    print("[Info] Reading model architecture...")
+    finetune_model.load_weights(model_weight_filename)
+
+    print("[Info] Loading model weights -- DONE!")
+    finetune_model.compile(
+        optimizer='sgd', loss='mean_squared_error', metrics=["accuracy"])
+    finetune_model._make_predict_function()
+    return finetune_model
+
+
+def read_img(tid):
+    directory = WORK_DIR + "" + tid
+    filenames = os.listdir(directory)
+    total_files = len(filenames)
+    predict_on_file = WORK_DIR + "" + tid + "/" + filenames[random.randint(
+        0, total_files - 1)]
+    img = Image.open(predict_on_file)
+    img = cv2.resize(np.array(img), (CROP_SIZE, CROP_SIZE))
+    input = []
+    input.append(np.array(img))
+    img_np_array = np.array(input)
+    return img_np_array
+
+
+class StaticModel:
+    def __init__(self):
+        self.model = get_model()
+
+    def predict(self, path):
+        img_np_array = read_img(path)
+        intermediate_output = self.model.predict(img_np_array)
+        bkend.clear_session()
+        return intermediate_output
+
+
 def main():
     test_generator = init_test_generator()
     test_ids, labels, class_maping = read_test_ids()
@@ -96,16 +167,7 @@ def main():
     hit = 0
     total = len(test_ids)
     for tid in test_ids:
-        directory = WORK_DIR + "" + tid
-        filenames = os.listdir(directory)
-        total_files = len(filenames)
-        predict_on_file = WORK_DIR + "" + tid + "/" + filenames[random.randint(
-            0, total_files - 1)]
-        img = Image.open(predict_on_file)
-        img = cv2.resize(np.array(img), (CROP_SIZE, CROP_SIZE))
-        input = []
-        input.append(np.array(img))
-        img_np_array = np.array(input)
+        img_np_array = read_img(tid)
         result = finetune_model.predict(img_np_array, verbose=1)
         index = np.argmax(result)
         cl = ""

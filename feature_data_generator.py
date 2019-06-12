@@ -5,6 +5,8 @@
 import numpy as np
 import keras
 import input_data
+from static_image_predict import StaticModel
+from c3d_predict import C3dModel
 
 
 class FeatureDataGenerator(keras.utils.Sequence):
@@ -32,6 +34,8 @@ class FeatureDataGenerator(keras.utils.Sequence):
         self.work_directory = work_directory
         self.fusion_method = fusion_method
         self.fusion_technique = fusion_technique
+        self.static_model = StaticModel()
+        self.c3d_model = C3dModel()
         self.on_epoch_end()
 
     def __len__(self):
@@ -61,13 +65,16 @@ class FeatureDataGenerator(keras.utils.Sequence):
     def __data_generation(self, list_IDs_temp):
         'Generates data containing batch_size samples'  # X : (n_samples, *dim, n_channels)
         # Initialization
-        X = np.empty((self.batch_size, *self.dim, self.n_channels))
+        X = np.empty((self.batch_size, self.n_channels, self.dim))
         y = np.empty((self.batch_size), dtype=int)
         # Generate data
         for i, ID in enumerate(list_IDs_temp):
-            static = np.load(work_directory + ID + '_static.npy')
-            c3d = np.load(work_directory + ID + '_c3d.npy')
+            #static = np.load(work_directory + ID + '_static.npy')
+            #c3d = np.load(work_directory + ID + '_c3d.npy')
+            static = self.static_model.predict(ID)
+            c3d = self.c3d_model.predict(self.work_directory + ID)
             # Store sample
+            print(X[i, ].shape)
             X[i, ] = self.fusion_method(static, c3d, self.fusion_technique)
 
             # Store class
