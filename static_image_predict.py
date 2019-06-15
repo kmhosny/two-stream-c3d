@@ -10,6 +10,7 @@ from keras.optimizers import SGD, Adam
 from keras.applications.resnet50 import ResNet50, preprocess_input
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
+import tensorflow as tf
 from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
@@ -136,11 +137,13 @@ def read_img(tid):
 class StaticModel:
     def __init__(self):
         self.model = get_model()
+        self.graph = tf.get_default_graph()
 
     def predict(self, path):
         img_np_array = read_img(path)
-        intermediate_output = self.model.predict(img_np_array)
-        bkend.clear_session()
+        with self.graph.as_default():
+            intermediate_output = self.model.predict(img_np_array)
+
         return intermediate_output
 
 

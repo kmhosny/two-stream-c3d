@@ -6,12 +6,14 @@ import os
 #os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 import numpy as np
 import keras.backend as K
+
 from keras.models import model_from_json
 from keras.models import Model
 from keras.layers import Dense, Dropout
 from keras.optimizers import SGD
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
+import tensorflow as tf
 from video_data_generator import VideoDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
@@ -110,14 +112,15 @@ def init_test_generator():
 class C3dModel:
     def __init__(self):
         self.model = get_model()
+        self.graph = tf.get_default_graph()
 
     def predict(self, path):
         img_np_array = []
         img_np_array.append(
             input_data.get_frames_data(path, NUMBER_OF_FRAMES, CROP_SIZE))
         img_np_array = np.array(img_np_array)
-        intermediate_output = self.model.predict(img_np_array)
-        K.clear_session()
+        with self.graph.as_default():
+            intermediate_output = self.model.predict(img_np_array)
         return intermediate_output
 
 
