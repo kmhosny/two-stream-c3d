@@ -18,10 +18,8 @@ def get_frames_data(filename,
     s_index = 0
     np_mean = np.load('crop_mean.npy').reshape(
         [mean_frames_per_clip, crop_size, crop_size, 3])
-    print(filename)
     for parent, dirnames, filenames in os.walk(filename):
         total_files = len(filenames)
-        print(filename, dirnames, filenames)
         if (total_files < num_frames_per_clip):
             diff = num_frames_per_clip - len(filenames)
             for k in range(diff):

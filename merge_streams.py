@@ -85,13 +85,14 @@ def init_generators():
 
 def deep_model():
     model = Sequential()
-    model.add(Dense(200, activation='relu', input_dim=NUM_OF_CLASSES))
+    model.add(Dense(200, activation='relu', input_shape=(1, NUM_OF_CLASSES)))
     model.add(Dropout(0.5))
     model.add(Dense(200, activation='relu'))
     model.add(Dropout(0.5))
     model.add(Dense(NUM_OF_CLASSES, activation='softmax'))
     model.compile(
         loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
+    model.summary()
     return model
 
 
