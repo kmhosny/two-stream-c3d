@@ -1,6 +1,6 @@
 import keras.backend as K
 from keras.models import Model, Sequential
-from keras.layers import Dense, Dropout
+from keras.layers import Dense, Dropout, Flatten
 import numpy as np
 from feature_data_generator import FeatureDataGenerator
 from sklearn.model_selection import train_test_split
@@ -89,6 +89,7 @@ def deep_model():
     model.add(Dropout(0.5))
     model.add(Dense(200, activation='relu'))
     model.add(Dropout(0.5))
+    model.add(Flatten())
     model.add(Dense(NUM_OF_CLASSES, activation='softmax'))
     model.compile(
         loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
@@ -98,8 +99,6 @@ def deep_model():
 
 def merge_streams_output(static_stream, c3d_stream, technique):
     func = merge_technique[technique]
-    print("static stream shape", static_stream.shape)
-    print("c3d stream shape", c3d_stream.shape)
     return func(static_stream, c3d_stream)
 
 

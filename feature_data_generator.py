@@ -74,7 +74,6 @@ class FeatureDataGenerator(keras.utils.Sequence):
             static = self.static_model.predict(ID)
             c3d = self.c3d_model.predict(self.work_directory + ID)
             # Store sample
-            print(X[i, ].shape)
             X[i, ] = self.fusion_method(static, c3d, self.fusion_technique)
 
             # Store class
