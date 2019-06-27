@@ -4,3 +4,4 @@ __pycache__
 *.mp4
 logs/*
 config.yml
+one_network_logs/*
