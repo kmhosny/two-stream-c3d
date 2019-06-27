@@ -71,7 +71,6 @@ class VideoImageDataGenerator(keras.utils.Sequence):
         # Generate data
         for i, ID in enumerate(list_IDs_temp):
             # Store sample
-            print(ID)
             frame_data = input_data.get_frames_data(
                 self.work_directory + ID, self.num_of_frames, self.crop_size)
             image_index = random.randint(0, len(frame_data) - 1)
