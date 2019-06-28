@@ -118,13 +118,7 @@ def deep_model():
     encoded_c3d = c3d_model(video_input)
     encoded_static = static_model(image_input)
     merged = concatenate([encoded_c3d, encoded_static])
-
-    merge_model = Dense(200, activation='relu')(merged)
-    merge_model = Dropout(0.5)(merge_model)
-    merge_model = Dense(200, activation='relu')(merge_model)
-    merge_model = Dropout(0.5)(merge_model)
-    #merge_model = Flatten()(merge_model)
-    merge_model = Dense(NUM_OF_CLASSES, activation='softmax')(merge_model)
+    merge_model = Dense(NUM_OF_CLASSES, activation='softmax')(merged)
     model = Model(inputs=[video_input, image_input], outputs=merge_model)
     model.compile(
         loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
