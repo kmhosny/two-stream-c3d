@@ -1,0 +1,39 @@
+Epoch 00090: saving model to ./models/one_network_scratch-90-0.59.h5
+Epoch 91/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0042 - acc: 0.6556 - val_loss: 0.0050 - val_acc: 0.5909
+
+Epoch 00091: saving model to ./models/one_network_scratch-91-0.59.h5
+Epoch 92/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0042 - acc: 0.6650 - val_loss: 0.0050 - val_acc: 0.5903
+
+Epoch 00092: saving model to ./models/one_network_scratch-92-0.59.h5
+Epoch 93/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0041 - acc: 0.6643 - val_loss: 0.0048 - val_acc: 0.6087
+
+Epoch 00093: saving model to ./models/one_network_scratch-93-0.61.h5
+Epoch 94/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0041 - acc: 0.6687 - val_loss: 0.0047 - val_acc: 0.6245
+
+Epoch 00094: saving model to ./models/one_network_scratch-94-0.62.h5
+Epoch 95/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0040 - acc: 0.6765 - val_loss: 0.0048 - val_acc: 0.6203
+
+Epoch 00095: saving model to ./models/one_network_scratch-95-0.62.h5
+Epoch 96/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0040 - acc: 0.6795 - val_loss: 0.0047 - val_acc: 0.6234
+
+Epoch 00096: saving model to ./models/one_network_scratch-96-0.62.h5
+Epoch 97/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0039 - acc: 0.6889 - val_loss: 0.0047 - val_acc: 0.6187
+
+Epoch 00097: saving model to ./models/one_network_scratch-97-0.62.h5
+Epoch 98/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0038 - acc: 0.6912 - val_loss: 0.0046 - val_acc: 0.6187
+
+Epoch 00098: saving model to ./models/one_network_scratch-98-0.62.h5
+Epoch 99/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0038 - acc: 0.6964 - val_loss: 0.0047 - val_acc: 0.6234
+
+Epoch 00099: saving model to ./models/one_network_scratch-99-0.62.h5
+Epoch 100/100
+476/476 [==============================] - 618s 1s/step - loss: 0.0037 - acc: 0.6994 - val_loss: 0.0045 - val_acc: 0.6282

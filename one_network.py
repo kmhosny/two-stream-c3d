@@ -22,7 +22,7 @@ TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
 NUM_OF_CLASSES = 101
 BATCH_SIZE = 16
-NUM_EPOCHS = 100
+NUM_EPOCHS = 500
 CROP_SIZE = 112
 C3D_INPUT_SHAPE = (16, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
@@ -121,7 +121,7 @@ def deep_model():
     merge_model = Dense(NUM_OF_CLASSES, activation='softmax')(merged)
     model = Model(inputs=[video_input, image_input], outputs=merge_model)
     model.compile(
-        loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
+        loss='mean_squared_error', optimizer='nadam', metrics=['accuracy'])
     model.summary()
     return model
 
@@ -139,7 +139,7 @@ def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
     filepath = "./models/one_network_scratch-{epoch:02d}-{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs"
+    log_dir = "./one_network_logs/500/"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
