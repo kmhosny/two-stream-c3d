@@ -8,7 +8,6 @@ from keras.models import Model, Sequential, model_from_json
 from keras.layers import Dense, Dropout, Flatten, Input, concatenate
 from keras.applications.resnet50 import ResNet50
 from keras.utils import plot_model
-from keras.optimizers import SGD
 import numpy as np
 from feature_data_generator import FeatureDataGenerator
 from sklearn.model_selection import train_test_split
@@ -19,8 +18,10 @@ from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
 
 WORK_DIR = cfg['WORK_DIR']
+CLASS_IND = cfg['CLASS_IND']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
+MODEL_WEIGHTS_FILE = cfg['ONE_NETWORK_WEIGHTS']
 NUM_OF_CLASSES = 101
 BATCH_SIZE = 16
 NUM_EPOCHS = 500
@@ -34,22 +35,32 @@ def avg(ve1, ve2):
     return (ve1 + ve2) * 0.5
 
 
-def read_file_ids(filename):
-    f = open(filename, 'r')
+def read_test_ids():
+    class_maping = {}
+    f_maping = open(CLASS_IND, 'r')
+    lines_maping = list(f_maping)
+    for i in range(len(lines_maping)):
+        line = lines_maping[i].strip('\n').split()
+        class_id = int(line[0]) - 1
+        class_name = line[1]
+        class_maping[class_name] = class_id
+    f_maping.close()
+
+    f = open(TEST_SPLIT_FILE, 'r')
     lines = list(f)
     its = range(len(lines))
     IDs = []
     labels = {}
     for it in its:
-        line = lines[it].strip('\n').split()
-        dirname = line[0]
-        label = line[1]
+        line = lines[it].strip('\n')
+        dirname = line
         IDs.append(dirname)
-        labels[dirname] = int(label) - 1
+        class_name = dirname.split('/')[0]
+        labels[dirname] = class_maping[class_name]
     f.close()
-    print("Found %i files belonging to %i classes" %
-          (len(IDs), len(set(labels.values()))))
-    return IDs, labels
+    print("Found %i files for total of %i classes." %
+          (len(IDs), len(class_maping.keys())))
+    return IDs, labels, class_maping
 
 
 def split_train_validation(IDs, labels):
@@ -70,34 +81,19 @@ def split_train_validation(IDs, labels):
     return train_ids, train_labels, validation_ids, validation_labels
 
 
-def init_generators():
-    ids, labels = read_file_ids(TRAIN_SPLIT_FILE)
-    train_ids, train_labels, validation_ids, validation_labels = split_train_validation(
-        ids, labels)
+def init_test_generator():
+    ids, ground_truth, class_maping = read_test_ids()
 
-    train_datagen = VideoImageDataGenerator(
-        list_IDs=train_ids,
-        labels=train_labels,
-        c3d_dim=C3D_INPUT_SHAPE,
+    test_datagen = VideoDataGenerator(
+        list_IDs=ids,
+        labels=ground_truth,
         crop_size=CROP_SIZE,
         batch_size=BATCH_SIZE,
         work_directory=WORK_DIR,
         n_channels=3,
-        n_classes=len(set(train_labels.values())),
-        static_dim=STATIC_INPUT_SHAPE)
+        n_classes=len(class_maping.keys()))
 
-    validation_datagen = VideoImageDataGenerator(
-        list_IDs=validation_ids,
-        labels=validation_labels,
-        crop_size=CROP_SIZE,
-        c3d_dim=C3D_INPUT_SHAPE,
-        batch_size=BATCH_SIZE,
-        work_directory=WORK_DIR,
-        n_channels=3,
-        n_classes=len(set(train_labels.values())),
-        static_dim=STATIC_INPUT_SHAPE)
-
-    return train_datagen, validation_datagen
+    return test_datagen
 
 
 def build_static_model():
@@ -121,10 +117,7 @@ def deep_model():
     merged = concatenate([encoded_c3d, encoded_static])
     merge_model = Dense(NUM_OF_CLASSES, activation='softmax')(merged)
     model = Model(inputs=[video_input, image_input], outputs=merge_model)
-    sgd = SGD(nesterov=True)
-    model.compile(
-        loss='mean_squared_error', optimizer=sgd, metrics=['accuracy'])
-    model.summary()
+
     return model
 
 
@@ -139,26 +132,22 @@ merge_technique = {0: vec_avg}
 
 def main():
     model = deep_model()
-    train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-{epoch:02d}-{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/500/"
-    checkpoint = ModelCheckpoint(
-        filepath, monitor="val_acc", verbose=1, mode='max')
-    board = TensorBoard(
-        log_dir=log_dir,
-        write_images=True,
-        update_freq='epoch',
-        histogram_freq=0)
-    callbacks_list = [checkpoint, board]
+    test_generator = init_test_generator()
+    model.load_weights(ONE_NETWORK_WEIGHTS)
+    model.compile(
+        loss='mean_squared_error', optimizer='nadam', metrics=['accuracy'])
 
-    model.fit_generator(
-        train_generator,
-        validation_data=validation_generator,
-        epochs=NUM_EPOCHS,
+    result = model.evaluate_generator(
+        generator=test_generator,
+        steps=10,
         workers=1,
-        use_multiprocessing=True,
-        shuffle=True,
-        callbacks=callbacks_list)
+        use_multiprocessing=False,
+        verbose=1)
+    prediction_classes = []
+    for single_prediction in result:
+        prediction_classes.append(np.argmax(single_prediction))
+
+    print("result: ", result, model.metrics_names)
 
 
 if __name__ == '__main__':
