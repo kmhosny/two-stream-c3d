@@ -84,14 +84,16 @@ def split_train_validation(IDs, labels):
 def init_test_generator():
     ids, ground_truth, class_maping = read_test_ids()
 
-    test_datagen = VideoDataGenerator(
+    test_datagen = VideoImageDataGenerator(
         list_IDs=ids,
         labels=ground_truth,
+        c3d_dim=C3D_INPUT_SHAPE,
         crop_size=CROP_SIZE,
         batch_size=BATCH_SIZE,
         work_directory=WORK_DIR,
         n_channels=3,
-        n_classes=len(class_maping.keys()))
+        n_classes=len(class_maping.keys()),
+        static_dim=STATIC_INPUT_SHAPE)
 
     return test_datagen
 
@@ -133,7 +135,7 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     test_generator = init_test_generator()
-    model.load_weights(ONE_NETWORK_WEIGHTS)
+    model.load_weights(MODEL_WEIGHTS_FILE)
     model.compile(
         loss='mean_squared_error', optimizer='nadam', metrics=['accuracy'])
 

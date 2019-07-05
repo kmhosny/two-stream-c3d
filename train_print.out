@@ -37,3 +37,49 @@ Epoch 99/100
 Epoch 00099: saving model to ./models/one_network_scratch-99-0.62.h5
 Epoch 100/100
 476/476 [==============================] - 618s 1s/step - loss: 0.0037 - acc: 0.6994 - val_loss: 0.0045 - val_acc: 0.6282
+
+
+
+=============================================================================================================================
+Epoch 00490: saving model to ./models/one_network_scratch-490-0.92.h5
+Epoch 491/500
+476/476 [==============================] - 630s 1s/step - loss: 1.8650e-04 - acc: 0.9890 - val_loss: 0.0011 - val_acc: 0.9212
+
+Epoch 00491: saving model to ./models/one_network_scratch-491-0.92.h5
+Epoch 492/500
+476/476 [==============================] - 631s 1s/step - loss: 2.1767e-04 - acc: 0.9870 - val_loss: 0.0012 - val_acc: 0.9144
+
+Epoch 00492: saving model to ./models/one_network_scratch-492-0.91.h5
+Epoch 493/500
+476/476 [==============================] - 630s 1s/step - loss: 2.2172e-04 - acc: 0.9856 - val_loss: 0.0011 - val_acc: 0.9212
+
+Epoch 00493: saving model to ./models/one_network_scratch-493-0.92.h5
+Epoch 494/500
+476/476 [==============================] - 630s 1s/step - loss: 2.1252e-04 - acc: 0.9865 - val_loss: 0.0012 - val_acc: 0.9123
+
+Epoch 00494: saving model to ./models/one_network_scratch-494-0.91.h5
+Epoch 495/500
+476/476 [==============================] - 630s 1s/step - loss: 1.9990e-04 - acc: 0.9875 - val_loss: 0.0012 - val_acc: 0.9144
+
+Epoch 00495: saving model to ./models/one_network_scratch-495-0.91.h5
+Epoch 496/500
+476/476 [==============================] - 630s 1s/step - loss: 2.1198e-04 - acc: 0.9870 - val_loss: 0.0012 - val_acc: 0.9133
+
+Epoch 00496: saving model to ./models/one_network_scratch-496-0.91.h5
+Epoch 497/500
+476/476 [==============================] - 630s 1s/step - loss: 2.0782e-04 - acc: 0.9866 - val_loss: 0.0011 - val_acc: 0.9181
+
+Epoch 00497: saving model to ./models/one_network_scratch-497-0.92.h5
+Epoch 498/500
+476/476 [==============================] - 630s 1s/step - loss: 2.0115e-04 - acc: 0.9870 - val_loss: 0.0011 - val_acc: 0.9223
+
+Epoch 00498: saving model to ./models/one_network_scratch-498-0.92.h5
+Epoch 499/500
+476/476 [==============================] - 630s 1s/step - loss: 1.9925e-04 - acc: 0.9881 - val_loss: 0.0012 - val_acc: 0.9112
+
+Epoch 00499: saving model to ./models/one_network_scratch-499-0.91.h5
+Epoch 500/500
+476/476 [==============================] - 630s 1s/step - loss: 2.1017e-04 - acc: 0.9875 - val_loss: 0.0012 - val_acc: 0.9081
+
+Epoch 00500: saving model to ./models/one_network_scratch-500-0.91.h5
+
