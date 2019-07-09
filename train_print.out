@@ -83,3 +83,46 @@ Epoch 500/500
 
 Epoch 00500: saving model to ./models/one_network_scratch-500-0.91.h5
 
+================================================================================================================
+
+Epoch 00340: saving model to ./models/one_network_scratch-l3-340-0.88.h5
+Epoch 341/350
+481/481 [==============================] - 633s 1s/step - loss: 3.9503e-04 - acc: 0.9767 - val_loss: 0.0017 - val_acc: 0.8714
+
+Epoch 00341: saving model to ./models/one_network_scratch-l3-341-0.87.h5
+Epoch 342/350
+481/481 [==============================] - 633s 1s/step - loss: 4.0012e-04 - acc: 0.9744 - val_loss: 0.0015 - val_acc: 0.8875
+
+Epoch 00342: saving model to ./models/one_network_scratch-l3-342-0.89.h5
+Epoch 343/350
+481/481 [==============================] - 633s 1s/step - loss: 3.9025e-04 - acc: 0.9754 - val_loss: 0.0016 - val_acc: 0.8880
+
+Epoch 00343: saving model to ./models/one_network_scratch-l3-343-0.89.h5
+Epoch 344/350
+481/481 [==============================] - 633s 1s/step - loss: 3.7495e-04 - acc: 0.9771 - val_loss: 0.0016 - val_acc: 0.8839
+
+Epoch 00344: saving model to ./models/one_network_scratch-l3-344-0.88.h5
+Epoch 345/350
+481/481 [==============================] - 633s 1s/step - loss: 3.8091e-04 - acc: 0.9756 - val_loss: 0.0016 - val_acc: 0.8781
+
+Epoch 00345: saving model to ./models/one_network_scratch-l3-345-0.88.h5
+Epoch 346/350
+481/481 [==============================] - 633s 1s/step - loss: 3.8166e-04 - acc: 0.9761 - val_loss: 0.0016 - val_acc: 0.8891
+
+Epoch 00346: saving model to ./models/one_network_scratch-l3-346-0.89.h5
+Epoch 347/350
+481/481 [==============================] - 633s 1s/step - loss: 3.6737e-04 - acc: 0.9780 - val_loss: 0.0016 - val_acc: 0.8833
+
+Epoch 00347: saving model to ./models/one_network_scratch-l3-347-0.88.h5
+Epoch 348/350
+481/481 [==============================] - 633s 1s/step - loss: 3.5835e-04 - acc: 0.9783 - val_loss: 0.0016 - val_acc: 0.8797
+
+Epoch 00348: saving model to ./models/one_network_scratch-l3-348-0.88.h5
+Epoch 349/350
+481/481 [==============================] - 633s 1s/step - loss: 3.8049e-04 - acc: 0.9758 - val_loss: 0.0016 - val_acc: 0.8828
+
+Epoch 00349: saving model to ./models/one_network_scratch-l3-349-0.88.h5
+Epoch 350/350
+481/481 [==============================] - 633s 1s/step - loss: 3.7465e-04 - acc: 0.9762 - val_loss: 0.0017 - val_acc: 0.8776
+
+Epoch 00350: saving model to ./models/one_network_scratch-l3-350-0.88.h5
