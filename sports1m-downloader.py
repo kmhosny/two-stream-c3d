@@ -45,7 +45,9 @@ def main():
             video_url = splits[0]
             ids = splits[1].split(',')
             for i in ids:
-                if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mkv') or os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mp4') or os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.webm')
+                if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mkv')
+                or os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mp4')
+                or os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.webm'):
                     continue
                 if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i]):
                     os.mkdir(SPORTS_DATASET_DIR + '/' + classes[i])
