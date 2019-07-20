@@ -58,7 +58,7 @@ def main():
             if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
                 os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
         ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
-            i] + '/' + video_id + '.mp4'
+            inti] + '/' + video_id + '.mp4'
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
             try:
                 ydl.download([video_url])
