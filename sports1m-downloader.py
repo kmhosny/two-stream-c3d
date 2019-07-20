@@ -46,6 +46,7 @@ def main():
         ids = splits[1].split(',')
         for i in ids:
             inti = int(i)
+            video_id = video_url.split("=")[1]
             if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
                               video_id + '.mkv') or os.path.exists(
                                   SPORTS_DATASET_DIR + '/' + classes[inti] +
@@ -56,7 +57,6 @@ def main():
                 continue
             if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
                 os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
-        video_id = video_url.split("=")[1]
         ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
             i] + '/' + video_id + '.mp4'
         with youtube_dl.YoutubeDL(ydl_opts) as ydl:
