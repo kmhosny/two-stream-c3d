@@ -45,15 +45,17 @@ def main():
         video_url = splits[0]
         ids = splits[1].split(',')
         for i in ids:
-            if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' +
+            inti = int(i)
+            if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
                               video_id + '.mkv') or os.path.exists(
-                                  SPORTS_DATASET_DIR + '/' + classes[i] + '/' +
-                                  video_id + '.mp4') or os.path.exists(
-                                      SPORTS_DATASET_DIR + '/' + classes[i] +
-                                      '/' + video_id + '.webm'):
+                                  SPORTS_DATASET_DIR + '/' + classes[inti] +
+                                  '/' + video_id + '.mp4') or os.path.exists(
+                                      SPORTS_DATASET_DIR + '/' +
+                                      classes[inti] + '/' + video_id +
+                                      '.webm'):
                 continue
-            if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i]):
-                os.mkdir(SPORTS_DATASET_DIR + '/' + classes[i])
+            if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
+                os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
         video_id = video_url.split("=")[1]
         ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
             i] + '/' + video_id + '.mp4'
@@ -61,8 +63,7 @@ def main():
             try:
                 ydl.download([video_url])
             except Exception as e:
-                print('downloading ' + video_id + 'of class ' + classes[i] +
-                      'failed')
+                print('downloading ' + video_id + 'failed')
 
     f.close()
 
