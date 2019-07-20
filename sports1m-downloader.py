@@ -36,10 +36,11 @@ def main():
     for l in lines:
         classes[class_index] = l
         class_index = class_index + 1
+    flabels.close()
     f = open(SPORTS_FILE, 'r')
     lines = f.readlines()
     for l in lines:
-            print l
+            print(l)
             splits = l.split()
             video_url = splits[0]
             ids = splits[1].split(',')
@@ -54,7 +55,7 @@ def main():
                 try:
                     ydl.download([video_url])
                 except Exception as e:
-                    print 'downloading '+video_id + 'of class '+classes[i]+ 'failed'
+                    print('downloading '+video_id + 'of class '+classes[i]+ 'failed')
 
     f.close()
 
