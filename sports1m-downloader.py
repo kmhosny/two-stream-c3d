@@ -40,24 +40,29 @@ def main():
     f = open(SPORTS_FILE, 'r')
     lines = f.readlines()
     for l in lines:
-            print(l)
-            splits = l.split()
-            video_url = splits[0]
-            ids = splits[1].split(',')
-            for i in ids:
-                if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mkv')
-                or os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mp4')
-                or os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.webm'):
-                    continue
-                if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i]):
-                    os.mkdir(SPORTS_DATASET_DIR + '/' + classes[i])
-            video_id = video_url.split("=")[1]
-            ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[i] + '/' + video_id + '.mp4'
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                try:
-                    ydl.download([video_url])
-                except Exception as e:
-                    print('downloading '+video_id + 'of class '+classes[i]+ 'failed')
+        print(l)
+        splits = l.split()
+        video_url = splits[0]
+        ids = splits[1].split(',')
+        for i in ids:
+            if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i] + '/' +
+                              video_id + '.mkv') or os.path.exists(
+                                  SPORTS_DATASET_DIR + '/' + classes[i] + '/' +
+                                  video_id + '.mp4') or os.path.exists(
+                                      SPORTS_DATASET_DIR + '/' + classes[i] +
+                                      '/' + video_id + '.webm'):
+                continue
+            if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[i]):
+                os.mkdir(SPORTS_DATASET_DIR + '/' + classes[i])
+        video_id = video_url.split("=")[1]
+        ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
+            i] + '/' + video_id + '.mp4'
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            try:
+                ydl.download([video_url])
+            except Exception as e:
+                print('downloading ' + video_id + 'of class ' + classes[i] +
+                      'failed')
 
     f.close()
 
