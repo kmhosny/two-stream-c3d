@@ -34,7 +34,7 @@ def main():
     classes = {}
     class_index = 0
     for l in lines:
-        classes[class_index] = l
+        classes[class_index] = l.split('\n')[0]
         class_index = class_index + 1
     flabels.close()
     f = open(SPORTS_FILE, 'r')
