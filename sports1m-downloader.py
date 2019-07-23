@@ -4,6 +4,7 @@ import youtube_dl
 import os
 import glob
 import multiprocessing as mp
+from shutil import copyfile
 
 
 class MyLogger(object):
@@ -46,17 +47,33 @@ def execution(l):
     splits = l.split()
     video_url = splits[0]
     ids = splits[1].split(',')
+    src = ''
+    dsts = []
+    copy = False
     for i in ids:
         inti = int(i)
         video_id = video_url.split("=")[1]
         mutex.acquire()
+
         glob_res = glob.glob(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
                              video_id)
         if len(glob_res) > 0:
+            print(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' + video_id +
+                  ' already exists')
+            src = glob_res[0]
+            copy = True
             continue
         if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
             os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
+
+        dsts.append(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' + video_id)
+
         mutex.release()
+    if copy:
+        for dst in dsts:
+            copyfile(src, dst)
+            print('copied from ' + src + ' to ' + dst)
+        return src
     ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
         inti] + '/' + video_id + '.mp4'
     with youtube_dl.YoutubeDL(ydl_opts) as ydl:
@@ -65,6 +82,7 @@ def execution(l):
             print('downloaded to' + ydl_opts['outtmpl'])
         except Exception as e:
             print('downloading ' + video_id + 'failed')
+    return ydl_opts['outtmpl']
 
 
 def main():
