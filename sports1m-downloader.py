@@ -53,8 +53,6 @@ def execution(l):
     for i in ids:
         inti = int(i)
         video_id = video_url.split("=")[1]
-        mutex.acquire()
-
         glob_res = glob.glob(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
                              video_id + '*')
         if len(glob_res) > 0:
@@ -67,8 +65,6 @@ def execution(l):
             os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
 
         dsts.append(SPORTS_DATASET_DIR + '/' + classes[inti] + '/')
-
-        mutex.release()
     if copy:
         for dst in dsts:
             copy(src, dst)
