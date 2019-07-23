@@ -4,7 +4,7 @@ import youtube_dl
 import os
 import glob
 import multiprocessing as mp
-from shutil import copyfile
+from shutil import copy
 
 
 class MyLogger(object):
@@ -56,22 +56,22 @@ def execution(l):
         mutex.acquire()
 
         glob_res = glob.glob(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
-                             video_id)
+                             video_id + '*')
         if len(glob_res) > 0:
             print(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' + video_id +
-                  ' already exists')
+                  ' already exists as ', glob_res[0])
             src = glob_res[0]
             copy = True
             continue
         if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
             os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
 
-        dsts.append(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' + video_id)
+        dsts.append(SPORTS_DATASET_DIR + '/' + classes[inti] + '/')
 
         mutex.release()
     if copy:
         for dst in dsts:
-            copyfile(src, dst)
+            copy(src, dst)
             print('copied from ' + src + ' to ' + dst)
         return src
     ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
