@@ -2,6 +2,8 @@ from __future__ import unicode_literals
 from configuration import cfg
 import youtube_dl
 import os
+import glob
+import multiprocessing as mp
 
 
 class MyLogger(object):
@@ -20,51 +22,57 @@ def my_hook(d):
         print('Done downloading, now converting ...')
 
 
-def main():
+SPORTS_FILE = cfg['SPORTS_1M_LIST']
+SPORTS_DATASET_DIR = cfg['SPORTS_DATASET_DIR']
+SPORTS_DATASET_CLASS_LABELS = cfg['SPORTS_DATASET_LABELS']
+flabels = open(SPORTS_DATASET_CLASS_LABELS)
+lines = flabels.readlines()
+classes = {}
+class_index = 0
+for c in lines:
+    classes[class_index] = c.split('\n')[0]
+    class_index = class_index + 1
+flabels.close()
 
+mutex = mp.Lock()
+
+
+def execution(l):
     ydl_opts = {
         'logger': MyLogger(),
         'progress_hooks': [my_hook],
     }
-    SPORTS_FILE = cfg['SPORTS_1M_LIST']
-    SPORTS_DATASET_DIR = cfg['SPORTS_DATASET_DIR']
-    SPORTS_DATASET_CLASS_LABELS = cfg['SPORTS_DATASET_LABELS']
-    flabels = open(SPORTS_DATASET_CLASS_LABELS)
-    lines = flabels.readlines()
-    classes = {}
-    class_index = 0
-    for l in lines:
-        classes[class_index] = l.split('\n')[0]
-        class_index = class_index + 1
-    flabels.close()
+    print(l)
+    splits = l.split()
+    video_url = splits[0]
+    ids = splits[1].split(',')
+    for i in ids:
+        inti = int(i)
+        video_id = video_url.split("=")[1]
+        mutex.acquire()
+        glob_res = glob.glob(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
+                             video_id)
+        if len(glob_res) > 0:
+            continue
+        if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
+            os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
+        mutex.release()
+    ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
+        inti] + '/' + video_id + '.mp4'
+    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+        try:
+            ydl.download([video_url])
+            print('downloaded to' + ydl_opts['outtmpl'])
+        except Exception as e:
+            print('downloading ' + video_id + 'failed')
+
+
+def main():
+    pool = mp.Pool(mp.cpu_count())
     f = open(SPORTS_FILE, 'r')
     lines = f.readlines()
-    for l in lines:
-        print(l)
-        splits = l.split()
-        video_url = splits[0]
-        ids = splits[1].split(',')
-        for i in ids:
-            inti = int(i)
-            video_id = video_url.split("=")[1]
-            if os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
-                              video_id + '.mkv') or os.path.exists(
-                                  SPORTS_DATASET_DIR + '/' + classes[inti] +
-                                  '/' + video_id + '.mp4') or os.path.exists(
-                                      SPORTS_DATASET_DIR + '/' +
-                                      classes[inti] + '/' + video_id +
-                                      '.webm'):
-                continue
-            if not os.path.exists(SPORTS_DATASET_DIR + '/' + classes[inti]):
-                os.mkdir(SPORTS_DATASET_DIR + '/' + classes[inti])
-        ydl_opts['outtmpl'] = SPORTS_DATASET_DIR + '/' + classes[
-            inti] + '/' + video_id + '.mp4'
-        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-            try:
-                ydl.download([video_url])
-            except Exception as e:
-                print('downloading ' + video_id + 'failed')
-
+    pool.map(execution, [l for l in lines])
+    pool.close()
     f.close()
 
 
