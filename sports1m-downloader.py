@@ -75,7 +75,7 @@ def extract_info(l):
                 counters[inti] = (counters[inti]+1) or 0
                 subset.close()
         mutex.release()
-    print_with_date('Video '+video_url+' is '+int(duration)+' long')
+    print_with_date('Video '+video_url+' is '+str(duration)+' long')
 
 def execution(l):
     ydl_opts = {
