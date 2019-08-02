@@ -65,6 +65,9 @@ def extract_info(l):
             inti = int(i)
             if inti in counters and counters[inti] < 150:
                 write=True
+            elif not inti in counters:
+                counters[inti] = 1
+                write=True
         if write:
             subset = open(SPORTS_FILE_SUBSET, 'a+', 0)
             subset.write(l+'\n')
