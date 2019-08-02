@@ -63,7 +63,7 @@ def extract_info(l):
         write=False
         for i in ids:
             inti = int(i)
-            if counters.has_key(inti) and counters[inti] < 150:
+            if inti in counters and counters[inti] < 150:
                 write=True
         if write:
             subset = open(SPORTS_FILE_SUBSET, 'a+')
