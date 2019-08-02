@@ -44,6 +44,7 @@ def extract_info(l):
     ydl_opts = {
         'quiet': True,
         'skip_download': True,
+        'logger': MyLogger()
     }
     print_with_date(l)
     splits = l.split()
@@ -53,7 +54,7 @@ def extract_info(l):
         try:
             info=ydl.extract_info(video_url)
         except Exception as e:
-            print_with_date('downloading ' + video_id + 'failed')
+            print_with_date('downloading ' + video_url + 'failed')
             return
     duration = int(self.item_info.get('duration') or 0)
     if duration <= 90:
