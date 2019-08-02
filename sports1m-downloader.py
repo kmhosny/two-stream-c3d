@@ -23,7 +23,7 @@ def my_hook(d):
         print_with_date('Done downloading, now converting ...')
 
 def print_with_date(s):
-    print(str(datetime.datetime.now())+': '+s+'--'+mp.current_process())
+    print(str(datetime.datetime.now())+': '+s+'--'+str(mp.current_process()))
 
 SPORTS_FILE = cfg['SPORTS_1M_LIST']
 SPORTS_FILE_SUBSET = cfg['SPORTS_1M_LIST_SUBSET']
