@@ -66,14 +66,15 @@ def extract_info(l):
             if inti in counters and counters[inti] < 150:
                 write=True
         if write:
-            subset = open(SPORTS_FILE_SUBSET, 'a+')
+            subset = open(SPORTS_FILE_SUBSET, 'a+', 0)
             subset.write(l+'\n')
             for i in ids:
                 inti = int(i)
                 if not counters.has_key(inti):
                     counters[inti]=0
                 counters[inti] = (counters[inti]+1) or 0
-                subset.close()
+            print_with_date('wrote '+video_url+" to file")
+            subset.close()
         mutex.release()
     print_with_date('Video '+video_url+' is '+str(duration)+' long')
 
