@@ -75,7 +75,7 @@ def extract_info(l):
                 counters[inti] = (counters[inti]+1) or 0
                 subset.close()
         mutex.release()
-    print_with_date('Video '+video_url+' is '+duration+' long')
+    print_with_date('Video '+video_url+' is '+int(duration)+' long')
 
 def execution(l):
     ydl_opts = {
@@ -121,9 +121,13 @@ def execution(l):
 
 
 def main():
+    print_with_date('available cpus '+str(mp.cpu_count()))
     pool = mp.Pool(mp.cpu_count())
+    print_with_date('initialised pool')
     f = open(SPORTS_FILE, 'r')
+    print_with_date('readlines....')
     lines = f.readlines()
+    print_with_date('staring forks.........')
     pool.map(extract_info, [l for l in lines])
     pool.close()
     f.close()
