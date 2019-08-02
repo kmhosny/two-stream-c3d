@@ -56,8 +56,9 @@ def extract_info(l):
         except Exception as e:
             print_with_date('downloading ' + video_url + 'failed')
             return
-    duration = int(self.item_info.get('duration') or 0)
-    if duration <= 90:
+    duration = int(info.get('duration') or 0)
+
+    if duration > 0 and duration <= 90:
         mutex.acquire()
         write=False
         for i in ids:
@@ -126,7 +127,7 @@ def main():
     pool.map(extract_info, [l for l in lines])
     pool.close()
     f.close()
-
+    print(counters)
 
 if __name__ == "__main__":
     main()
