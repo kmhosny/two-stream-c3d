@@ -70,7 +70,7 @@ def extract_info(l):
                 counters[inti] = 0
                 write=True
         if write:
-            subset = open(SPORTS_FILE_SUBSET, 'a+', 0)
+            subset = open(SPORTS_FILE_SUBSET, 'a+')
             subset.write(l)
             for i in ids:
                 inti = int(i)
