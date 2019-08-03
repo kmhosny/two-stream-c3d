@@ -40,6 +40,7 @@ flabels.close()
 
 mutex = mp.Lock()
 counters={}
+
 def extract_info(l):
     ydl_opts = {
         'quiet': True,
@@ -64,21 +65,18 @@ def extract_info(l):
         write=False
         for i in ids:
             inti = int(i)
-            if inti in counters and counters[inti] < 150:
+            if inti in counters and len(counters[inti]) < 150:
                 write=True
             elif not inti in counters:
-                counters[inti] = 0
+                counters[inti] = []
                 write=True
         if write:
-            subset = open(SPORTS_FILE_SUBSET, 'a+')
-            subset.write(l)
             for i in ids:
                 inti = int(i)
                 if not inti in counters:
-                    counters[inti]=0
-                counters[inti] = (counters[inti]+1) or 0
-            print_with_date('wrote '+video_url+" to file")
-            subset.close()
+                    counters[inti] = []
+                counters[inti].append(l)
+            print_with_date('PUSHED '+video_url+" TO DATA OBJ")
         mutex.release()
         print_with_date("------RELEASED LOCK-----")
     print_with_date('Video '+video_url+' is '+str(duration)+' long')
@@ -125,18 +123,46 @@ def execution(l):
             print_with_date('downloading ' + video_id + 'failed')
     return ydl_opts['outtmpl']
 
+def sort_file(lines):
+    data={}
+    for l in lines:
+        splits = l.split()
+        ids = splits[1].split(',')
+        for i in ids:
+            inti = int(i)
+            if not inti in data:
+                data[inti] = []
+            data[inti].append(l)
+    return data
+
+def write_data_obj(data, output):
+    for k in data:
+        for i in data[k]:
+            output.write(i)
 
 def main():
-    print_with_date('available cpus '+str(mp.cpu_count()))
-    pool = mp.Pool(mp.cpu_count())
-    print_with_date('initialised pool')
-    f = open(SPORTS_FILE, 'r')
-    print_with_date('readlines....')
+    # print_with_date('available cpus '+str(mp.cpu_count()))
+    # pool = mp.Pool(mp.cpu_count())
+    # print_with_date('initialised pool')
+    # f = open(SPORTS_FILE, 'r')
+    # print_with_date('readlines....')
+    # lines = f.readlines()
+    # print_with_date('staring forks.........')
+    # pool.map(extract_info, [l for l in lines])
+    # pool.close()
+    # f.close()
+    #outfile = open(SPORTS_FILE_SUBSET, 'a+')
+    #write_data_obj(counters, outfile)
+    f = open(SPORTS_FILE_SUBSET, 'r')
     lines = f.readlines()
-    print_with_date('staring forks.........')
-    pool.map(extract_info, [l for l in lines])
-    pool.close()
-    f.close()
+    print_with_date('SORTING FILE')
+    counters = sort_file(lines)
+    print_with_date('DONE SORTING')
+    print_with_date('WRITING FILE')
+    outfile = open(SPORTS_FILE_SUBSET_SORTED, 'a+')
+    write_data_obj(counters, outfile)
+    print_with_date('DONE WRITING FILE')
+    outfile.close()
     print(counters)
 
 if __name__ == "__main__":
