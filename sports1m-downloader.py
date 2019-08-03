@@ -60,25 +60,27 @@ def extract_info(l):
 
     if duration > 0 and duration <= 90:
         mutex.acquire()
+        print_with_date("------ACQUIRED LOCK-----")
         write=False
         for i in ids:
             inti = int(i)
             if inti in counters and counters[inti] < 150:
                 write=True
             elif not inti in counters:
-                counters[inti] = 1
+                counters[inti] = 0
                 write=True
         if write:
             subset = open(SPORTS_FILE_SUBSET, 'a+', 0)
-            subset.write(l+'\n')
+            subset.write(l)
             for i in ids:
                 inti = int(i)
-                if not counters.has_key(inti):
+                if not inti in counters:
                     counters[inti]=0
                 counters[inti] = (counters[inti]+1) or 0
             print_with_date('wrote '+video_url+" to file")
             subset.close()
         mutex.release()
+        print_with_date("------RELEASED LOCK-----")
     print_with_date('Video '+video_url+' is '+str(duration)+' long')
 
 def execution(l):
