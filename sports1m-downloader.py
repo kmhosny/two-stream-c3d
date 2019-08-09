@@ -102,9 +102,8 @@ def execution(l):
         glob_res = glob.glob(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
                              video_id + '*')
         if len(glob_res) > 0:
-            print_with_date(
-                SPORTS_DATASET_DIR + '/' + classes[inti] + '/' + video_id +
-                ' already exists as ', glob_res[0])
+            print_with_date(SPORTS_DATASET_DIR + '/' + classes[inti] + '/' +
+                            video_id + ' already exists as ' + glob_res[0])
             src = glob_res[0]
             copy = True
             continue
@@ -114,6 +113,8 @@ def execution(l):
         dsts.append(SPORTS_DATASET_DIR + '/' + classes[inti] + '/')
     if copy:
         for dst in dsts:
+            if dst == src:
+                continue
             copy(src, dst)
             print_with_date('copied from ' + src + ' to ' + dst)
         return src
