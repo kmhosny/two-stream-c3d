@@ -162,8 +162,8 @@ def main():
     pool.map(extract_info, [l for l in lines])
     pool.close()
     f.close()
-    #outfile = open(SPORTS_FILE_SUBSET, 'a+')
-    #write_data_obj(counters, outfile)
+    outfile = open(SPORTS_FILE_SUBSET, 'a+')
+    write_data_obj(counters, outfile)
     # f = open(SPORTS_FILE_SUBSET, 'r')
     # lines = f.readlines()
     # print_with_date('SORTING FILE')
@@ -172,8 +172,8 @@ def main():
     # print_with_date('WRITING FILE')
     # outfile = open(SPORTS_FILE_SUBSET_SORTED, 'a+')
     # write_data_obj(counters, outfile)
-    # print_with_date('DONE WRITING FILE')
-    # outfile.close()
+    print_with_date('DONE WRITING FILE')
+    outfile.close()
     print(counters)
 
 
