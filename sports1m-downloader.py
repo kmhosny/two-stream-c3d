@@ -29,9 +29,12 @@ def print_with_date(s):
           str(mp.current_process()))
 
 
-SPORTS_FILE = cfg['SPORTS_1M_LIST_SUBSET_SORTED']
-SPORTS_FILE_SUBSET = cfg['SPORTS_1M_LIST_SUBSET']
-SPORTS_FILE_SUBSET_SORTED = cfg['SPORTS_1M_LIST_SUBSET_SORTED']
+#SPORTS_FILE = cfg['SPORTS_1M_LIST_SUBSET_SORTED']
+SPORTS_FILE = cfg['SPORTS_1M_TEST_LIST']
+#SPORTS_FILE_SUBSET = cfg['SPORTS_1M_LIST_SUBSET']
+SPORTS_FILE_SUBSET = cfg['SPORTS_1M_TEST_LIST_SUBSET']
+#SPORTS_FILE_SUBSET_SORTED = cfg['SPORTS_1M_LIST_SUBSET_SORTED']
+SPORTS_FILE_SUBSET_SORTED = cfg['SPORTS_1M_TEST_LIST_SUBSET_SORTED']
 SPORTS_DATASET_DIR = cfg['SPORTS_DATASET_DIR']
 SPORTS_DATASET_CLASS_LABELS = cfg['SPORTS_DATASET_LABELS']
 flabels = open(SPORTS_DATASET_CLASS_LABELS)
@@ -156,7 +159,7 @@ def main():
     print_with_date('readlines....')
     lines = f.readlines()
     print_with_date('staring forks.........')
-    pool.map(execution, [l for l in lines])
+    pool.map(extract_info, [l for l in lines])
     pool.close()
     f.close()
     #outfile = open(SPORTS_FILE_SUBSET, 'a+')
