@@ -41,7 +41,8 @@ flabels = open(SPORTS_DATASET_CLASS_LABELS)
 lines = flabels.readlines()
 classes = {}
 class_index = 0
-counters = {}
+manager = mp.Manager()
+counters = manager.dict()
 for c in lines:
     classes[class_index] = c.split('\n')[0]
     counters[class_index] = []
