@@ -41,13 +41,14 @@ flabels = open(SPORTS_DATASET_CLASS_LABELS)
 lines = flabels.readlines()
 classes = {}
 class_index = 0
+counters = {}
 for c in lines:
     classes[class_index] = c.split('\n')[0]
+    counters[class_index] = []
     class_index = class_index + 1
 flabels.close()
 
 mutex = mp.Lock()
-counters = {}
 
 
 def extract_info(l):
@@ -85,6 +86,7 @@ def extract_info(l):
         mutex.release()
         print_with_date("------RELEASED LOCK-----")
     print_with_date('Video ' + video_url + ' is ' + str(duration) + ' long')
+    print_with_date(str(counters))
 
 
 def execution(l):
