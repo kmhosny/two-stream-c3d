@@ -6,7 +6,7 @@
 #   Example Usage:
 #       sudo ./convert_video_to_images.sh ~/document/videofile/ 5
 #   Example Output:
-#       ~/document/videofile/walk/video1.avi 
+#       ~/document/videofile/walk/video1.avi
 #       #=>
 #       ~/document/videofile/walk/video1/00001.jpg
 #       ~/document/videofile/walk/video1/00002.jpg
@@ -17,12 +17,13 @@
 
 for folder in $1/*
 do
-    for file in "$folder"/*.avi
+    for file in "$folder"/*
     do
-        if [[ ! -d "${file[@]%.avi}" ]]; then
-            mkdir -p "${file[@]%.avi}"
+        echo "${file[@]%.*}"
+        if [[ ! -d "${file[@]%.*}" ]]; then
+            mkdir -p "${file[@]%.*}"
         fi
-        ffmpeg -i "$file" -vf fps=$2 "${file[@]%.avi}"/%05d.jpg
+        ffmpeg -i "$file" -vf fps=$2 "${file[@]%.*}"/%05d.jpg
         rm "$file"
     done
 done
