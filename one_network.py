@@ -21,9 +21,9 @@ from keras.callbacks import TensorBoard
 WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
-NUM_OF_CLASSES = 101
+NUM_OF_CLASSES = 487
 BATCH_SIZE = 16
-NUM_EPOCHS = 500
+NUM_EPOCHS = 1500
 CROP_SIZE = 112
 C3D_INPUT_SHAPE = (16, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
@@ -42,8 +42,9 @@ def read_file_ids(filename):
     labels = {}
     for it in its:
         line = lines[it].strip('\n').split()
-        dirname = line[0]
-        label = line[1]
+        dirname = line[:-1]
+        dirname = " ".join(dirname)
+        label = line[-1:][0]
         IDs.append(dirname)
         labels[dirname] = int(label) - 1
     f.close()
@@ -140,8 +141,8 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-{epoch:02d}-{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/500/"
+    filepath = "./models/one_network_scratch-1M-{val_acc:.2f}.h5"
+    log_dir = "./one_network_logs/1M/1500/"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
