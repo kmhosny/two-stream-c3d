@@ -21,13 +21,16 @@ from keras.callbacks import TensorBoard
 WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
-NUM_OF_CLASSES = 487
+NUM_OF_CLASSES = 51
 BATCH_SIZE = 16
-NUM_EPOCHS = 1500
+NUM_EPOCHS = 500
 CROP_SIZE = 112
 C3D_INPUT_SHAPE = (16, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
 MODEL_JSON_FILENAME = './models/c3d_ucf101_finetune_whole_iter_20000_tf_notop.json'
+VIDEO_MODEL_TOP = './models/c3d_ucf101_finetune_whole_iter_20000_tf.json'
+MODEL_WEIGHT_FILENAME = './models/c3d_UCF_finetune_weights-99-0.94.h5'
+PRETRAINED_VIDEO_MODEL = cfg['PRETRAINED_VIDEO_MODEL']
 
 
 def avg(ve1, ve2):
@@ -112,11 +115,24 @@ def build_static_model():
     return model
 
 
+def build_video_model():
+    c3d_model = ''
+    if PRETRAINED_VIDEO_MODEL:
+        model = model_from_json(open(VIDEO_MODEL_TOP, 'r').read())
+        model.load_weights(MODEL_WEIGHT_FILENAME)
+        c3d_model = Sequential()
+        for layer in model.layers[:-1]:
+            c3d_model.add(layer)
+    else:
+        c3d_model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
+    return c3d_model
+
+
 def deep_model():
     video_input = Input(shape=C3D_INPUT_SHAPE)
     image_input = Input(shape=STATIC_INPUT_SHAPE)
-    c3d_model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
     static_model = build_static_model()
+    c3d_model = build_video_model()
     encoded_c3d = c3d_model(video_input)
     encoded_static = static_model(image_input)
     merged = concatenate([encoded_c3d, encoded_static])
@@ -141,8 +157,8 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-1M-{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/1M/1500/"
+    filepath = "./models/one_network_scratch-51-{val_acc:.2f}.h5"
+    log_dir = "./one_network_logs/51/500-pretrained/"
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
