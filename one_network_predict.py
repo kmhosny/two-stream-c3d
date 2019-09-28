@@ -28,8 +28,10 @@ NUM_EPOCHS = 500
 CROP_SIZE = 112
 C3D_INPUT_SHAPE = (16, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
-MODEL_JSON_FILENAME = './models/c3d_ucf101_finetune_whole_iter_20000_tf_notop.json'
-
+MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
+VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
+VIDEO_MODEL_WEIGHT_FILENAME = './models/sports1M_weights_tf.h5'
+PRETRAINED_VIDEO_MODEL = cfg['PRETRAINED_VIDEO_MODEL']
 
 def avg(ve1, ve2):
     return (ve1 + ve2) * 0.5
@@ -109,17 +111,30 @@ def build_static_model():
     return model
 
 
+def build_video_model():
+    c3d_model = ''
+    if PRETRAINED_VIDEO_MODEL:
+        model = model_from_json(open(VIDEO_MODEL_TOP, 'r').read())
+        model.load_weights(VIDEO_MODEL_WEIGHT_FILENAME)
+        c3d_model = Sequential()
+        for layer in model.layers[:-1]:
+            c3d_model.add(layer)
+    else:
+        c3d_model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
+    return c3d_model
+
+
 def deep_model():
     video_input = Input(shape=C3D_INPUT_SHAPE)
     image_input = Input(shape=STATIC_INPUT_SHAPE)
-    c3d_model = model_from_json(open(MODEL_JSON_FILENAME, 'r').read())
     static_model = build_static_model()
+    c3d_model = build_video_model()
     encoded_c3d = c3d_model(video_input)
     encoded_static = static_model(image_input)
     merged = concatenate([encoded_c3d, encoded_static])
     merge_model = Dense(NUM_OF_CLASSES, activation='softmax')(merged)
     model = Model(inputs=[video_input, image_input], outputs=merge_model)
-
+    model.summary()
     return model
 
 
