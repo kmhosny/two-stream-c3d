@@ -22,10 +22,11 @@ WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
 NUM_OF_CLASSES = cfg['NUM_OF_CLASSES']
-BATCH_SIZE = cfg['NUM_OF_FRAMES']
+BATCH_SIZE = 16
+NUM_OF_FRAMES = cfg['NUM_OF_FRAMES']
 NUM_EPOCHS = 500
 CROP_SIZE = 112
-C3D_INPUT_SHAPE = (BATCH_SIZE, 112, 112, 3)
+C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
 MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
 VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
@@ -88,7 +89,8 @@ def init_generators():
         work_directory=WORK_DIR,
         n_channels=3,
         n_classes=len(set(train_labels.values())),
-        static_dim=STATIC_INPUT_SHAPE)
+        static_dim=STATIC_INPUT_SHAPE,
+        num_of_frames=NUM_OF_FRAMES)
 
     validation_datagen = VideoImageDataGenerator(
         list_IDs=validation_ids,
@@ -99,7 +101,8 @@ def init_generators():
         work_directory=WORK_DIR,
         n_channels=3,
         n_classes=len(set(train_labels.values())),
-        static_dim=STATIC_INPUT_SHAPE)
+        static_dim=STATIC_INPUT_SHAPE,
+        num_of_frames=NUM_OF_FRAMES)
 
     return train_datagen, validation_datagen
 
@@ -157,8 +160,8 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-"+str(NUM_OF_CLASSES)+"-"+str(BATCH_SIZE)+"frs{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/{}/500-pretrained-{}frs/".format(NUM_OF_CLASSES, BATCH_SIZE)
+    filepath = "./models/one_network_scratch-"+str(NUM_OF_CLASSES)+"-"+str(NUM_OF_FRAMES)+"frs{val_acc:.2f}.h5"
+    log_dir = "./one_network_logs/{}/500-pretrained-{}frs/".format(NUM_OF_CLASSES, NUM_OF_FRAMES)
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
