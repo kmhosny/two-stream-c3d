@@ -22,10 +22,10 @@ WORK_DIR = cfg['WORK_DIR']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
 NUM_OF_CLASSES = 51
-BATCH_SIZE = 16
+BATCH_SIZE = cfg['NUM_OF_FRAMES']
 NUM_EPOCHS = 500
 CROP_SIZE = 112
-C3D_INPUT_SHAPE = (16, 112, 112, 3)
+C3D_INPUT_SHAPE = (BATCH_SIZE, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
 MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
 VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
@@ -157,8 +157,8 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-51-{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/51/500-pretrained/"
+    filepath = "./models/one_network_scratch-101-{}frs{val_acc:.2f}.h5".format(BATCH_SIZE)
+    log_dir = "./one_network_logs/101/500-pretrained-{}frs/".format(BATCH_SIZE)
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
