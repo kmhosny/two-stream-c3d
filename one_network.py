@@ -157,8 +157,8 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-101-{}frs{val_acc:.2f}.h5".format(BATCH_SIZE)
-    log_dir = "./one_network_logs/101/500-pretrained-{}frs/".format(BATCH_SIZE)
+    filepath = "./models/one_network_scratch-{}-{}frs{val_acc:.2f}.h5".format(NUM_OF_CLASSES, BATCH_SIZE)
+    log_dir = "./one_network_logs/{}/500-pretrained-{}frs/".format(NUM_OF_CLASSES, BATCH_SIZE)
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
