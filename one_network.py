@@ -10,10 +10,8 @@ from keras.applications.resnet50 import ResNet50
 from keras.utils import plot_model
 from keras.optimizers import SGD
 import numpy as np
-from feature_data_generator import FeatureDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
-from static_image_predict import get_model as get_static_model
 from video_image_data_generator import VideoImageDataGenerator
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard

@@ -397,3 +397,75 @@ Epoch 500/500
 
 Epoch 00500: saving model to ./models/one_network_scratch-101-l3-pretr-0.95.h5
 
+===============================================================51 20fs l1====================================
+510/510 [==============================] - 641s 1s/step - loss: 0.0016 - acc: 0.9434 - val_loss: 0.0096 - val_acc: 0.6535
+
+Epoch 00112: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 113/500
+510/510 [==============================] - 641s 1s/step - loss: 0.0017 - acc: 0.9441 - val_loss: 0.0093 - val_acc: 0.6585
+
+Epoch 00113: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 114/500
+510/510 [==============================] - 635s 1s/step - loss: 0.0016 - acc: 0.9441 - val_loss: 0.0093 - val_acc: 0.6634
+
+Epoch 00114: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 115/500
+510/510 [==============================] - 548s 1s/step - loss: 0.0016 - acc: 0.9434 - val_loss: 0.0093 - val_acc: 0.6575
+
+Epoch 00115: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 116/500
+510/510 [==============================] - 640s 1s/step - loss: 0.0015 - acc: 0.9466 - val_loss: 0.0095 - val_acc: 0.6565
+
+Epoch 00116: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 117/500
+510/510 [==============================] - 640s 1s/step - loss: 0.0016 - acc: 0.9444 - val_loss: 0.0097 - val_acc: 0.6516
+
+Epoch 00117: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 118/500
+510/510 [==============================] - 640s 1s/step - loss: 0.0015 - acc: 0.9446 - val_loss: 0.0093 - val_acc: 0.6614
+
+Epoch 00118: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 119/500
+510/510 [==============================] - 642s 1s/step - loss: 0.0015 - acc: 0.9449 - val_loss: 0.0100 - val_acc: 0.6417
+
+Epoch 00119: saving model to ./models/one_network_scratch-51-l1-20frs0.64.h5
+Epoch 120/500
+510/510 [==============================] - 651s 1s/step - loss: 0.0014 - acc: 0.9502 - val_loss: 0.0094 - val_acc: 0.6634
+
+Epoch 00120: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 121/500
+510/510 [==============================] - 585s 1s/step - loss: 0.0014 - acc: 0.9495 - val_loss: 0.0097 - val_acc: 0.6526
+
+Epoch 00121: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 122/500
+510/510 [==============================] - 641s 1s/step - loss: 0.0015 - acc: 0.9463 - val_loss: 0.0096 - val_acc: 0.6486
+
+Epoch 00122: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 123/500
+510/510 [==============================] - 640s 1s/step - loss: 0.0015 - acc: 0.9490 - val_loss: 0.0093 - val_acc: 0.6594
+
+Epoch 00123: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 124/500
+510/510 [==============================] - 643s 1s/step - loss: 0.0014 - acc: 0.9510 - val_loss: 0.0096 - val_acc: 0.6457
+
+Epoch 00124: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 125/500
+510/510 [==============================] - 643s 1s/step - loss: 0.0014 - acc: 0.9537 - val_loss: 0.0096 - val_acc: 0.6535
+
+Epoch 00125: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 126/500
+510/510 [==============================] - 647s 1s/step - loss: 0.0014 - acc: 0.9525 - val_loss: 0.0095 - val_acc: 0.6575
+
+Epoch 00126: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 127/500
+510/510 [==============================] - 655s 1s/step - loss: 0.0014 - acc: 0.9515 - val_loss: 0.0095 - val_acc: 0.6614
+
+Epoch 00127: saving model to ./models/one_network_scratch-51-l1-20frs0.66.h5
+Epoch 128/500
+510/510 [==============================] - 633s 1s/step - loss: 0.0014 - acc: 0.9517 - val_loss: 0.0096 - val_acc: 0.6526
+
+Epoch 00128: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
+Epoch 129/500
+510/510 [==============================] - 640s 1s/step - loss: 0.0014 - acc: 0.9500 - val_loss: 0.0096 - val_acc: 0.6496
+
+Epoch 00129: saving model to ./models/one_network_scratch-51-l1-20frs0.65.h5
