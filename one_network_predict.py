@@ -9,10 +9,8 @@ from keras.layers import Dense, Dropout, Flatten, Input, concatenate
 from keras.applications.resnet50 import ResNet50
 from keras.utils import plot_model
 import numpy as np
-from feature_data_generator import FeatureDataGenerator
 from sklearn.model_selection import train_test_split
 from configuration import cfg
-from static_image_predict import get_model as get_static_model
 from video_image_data_generator import VideoImageDataGenerator
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
@@ -22,11 +20,12 @@ CLASS_IND = cfg['CLASS_IND']
 TEST_SPLIT_FILE = cfg['TEST_SPLIT_FILE']
 TRAIN_SPLIT_FILE = cfg['TRAIN_SPLIT_FILE']
 MODEL_WEIGHTS_FILE = cfg['ONE_NETWORK_WEIGHTS']
-NUM_OF_CLASSES = 101
+NUM_OF_CLASSES = cfg['NUM_OF_CLASSES']
+NUM_OF_FRAMES = cfg['NUM_OF_FRAMES']
 BATCH_SIZE = 16
 NUM_EPOCHS = 500
 CROP_SIZE = 112
-C3D_INPUT_SHAPE = (16, 112, 112, 3)
+C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
 MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
 VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
@@ -95,7 +94,8 @@ def init_test_generator():
         work_directory=WORK_DIR,
         n_channels=3,
         n_classes=len(class_maping.keys()),
-        static_dim=STATIC_INPUT_SHAPE)
+        static_dim=STATIC_INPUT_SHAPE,
+        num_of_frames=NUM_OF_FRAMES)
 
     return test_datagen
 

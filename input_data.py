@@ -16,8 +16,8 @@ def get_frames_data(filename,
   (num_frames_per_clip) consecutive frames as a list of np arrays '''
     ret_arr = []
     s_index = 0
-    np_mean = np.load('crop_mean.npy').reshape(
-        [mean_frames_per_clip, crop_size, crop_size, 3])
+    #np_mean = np.load('crop_mean.npy').reshape(
+    #    [mean_frames_per_clip, crop_size, crop_size, 3])
     for parent, dirnames, filenames in os.walk(filename):
         total_files = len(filenames)
         if (total_files < num_frames_per_clip):
@@ -48,7 +48,7 @@ def get_frames_data(filename,
             crop_x = int((img.shape[0] - crop_size) / 2)
             crop_y = int((img.shape[1] - crop_size) / 2)
             img = img[crop_x:crop_x + crop_size, crop_y:crop_y +
-                      crop_size, :] - np_mean[j]
+                      crop_size, :] #- np_mean[j]
             img_data = np.array(img)
             ret_arr.append(img_data)
             j += 1
