@@ -581,3 +581,447 @@ Epoch 121/500
 953/953 [==============================] - 953s 1000ms/step - loss: 3.1353e-04 - acc: 0.9768 - val_loss: 0.0021 - val_acc: 0.8514
 
 Epoch 00121: saving model to ./models/one_network_scratch-101-l1-24frs0.85.h5
+===========================================================================8frs================================
+
+
+Epoch 00281: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 282/500
+476/476 [==============================] - 330s 692ms/step - loss: 1.9645e-04 - acc: 0.9858 - val_loss: 0.0015 - val_acc: 0.8950
+
+Epoch 00282: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 283/500
+476/476 [==============================] - 330s 694ms/step - loss: 2.0107e-04 - acc: 0.9853 - val_loss: 0.0015 - val_acc: 0.8913
+
+Epoch 00283: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 284/500
+476/476 [==============================] - 330s 694ms/step - loss: 2.0061e-04 - acc: 0.9857 - val_loss: 0.0016 - val_acc: 0.8824
+
+Epoch 00284: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 285/500
+476/476 [==============================] - 330s 694ms/step - loss: 1.9965e-04 - acc: 0.9858 - val_loss: 0.0016 - val_acc: 0.8839
+
+Epoch 00285: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 286/500
+476/476 [==============================] - 330s 692ms/step - loss: 1.8538e-04 - acc: 0.9873 - val_loss: 0.0016 - val_acc: 0.8934
+
+Epoch 00286: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 287/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8914e-04 - acc: 0.9865 - val_loss: 0.0017 - val_acc: 0.8845
+
+Epoch 00287: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 288/500
+476/476 [==============================] - 330s 694ms/step - loss: 1.8671e-04 - acc: 0.9862 - val_loss: 0.0016 - val_acc: 0.8892
+
+Epoch 00288: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 289/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.9073e-04 - acc: 0.9870 - val_loss: 0.0016 - val_acc: 0.8902
+
+Epoch 00289: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 290/500
+476/476 [==============================] - 329s 692ms/step - loss: 1.8953e-04 - acc: 0.9869 - val_loss: 0.0016 - val_acc: 0.8824
+
+Epoch 00290: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 291/500
+476/476 [==============================] - 331s 694ms/step - loss: 1.8707e-04 - acc: 0.9881 - val_loss: 0.0017 - val_acc: 0.8813
+
+Epoch 00291: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 292/500
+476/476 [==============================] - 330s 694ms/step - loss: 1.9053e-04 - acc: 0.9869 - val_loss: 0.0016 - val_acc: 0.8860
+
+Epoch 00292: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 293/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8151e-04 - acc: 0.9870 - val_loss: 0.0016 - val_acc: 0.8866
+
+Epoch 00293: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 294/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.9301e-04 - acc: 0.9869 - val_loss: 0.0015 - val_acc: 0.8866
+
+Epoch 00294: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 295/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.7963e-04 - acc: 0.9871 - val_loss: 0.0016 - val_acc: 0.8855
+
+Epoch 00295: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 296/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8767e-04 - acc: 0.9863 - val_loss: 0.0015 - val_acc: 0.8929
+
+Epoch 00296: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 297/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8870e-04 - acc: 0.9870 - val_loss: 0.0016 - val_acc: 0.8845
+
+Epoch 00297: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 298/500
+476/476 [==============================] - 329s 691ms/step - loss: 1.7322e-04 - acc: 0.9881 - val_loss: 0.0016 - val_acc: 0.8918
+
+Epoch 00298: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 299/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8008e-04 - acc: 0.9869 - val_loss: 0.0016 - val_acc: 0.8860
+
+Epoch 00299: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 300/500
+476/476 [==============================] - 330s 692ms/step - loss: 1.7234e-04 - acc: 0.9881 - val_loss: 0.0017 - val_acc: 0.8824
+
+Epoch 00300: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 301/500
+476/476 [==============================] - 331s 695ms/step - loss: 1.7193e-04 - acc: 0.9878 - val_loss: 0.0015 - val_acc: 0.8881
+
+Epoch 00301: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 302/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8088e-04 - acc: 0.9875 - val_loss: 0.0016 - val_acc: 0.8892
+
+Epoch 00302: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 303/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.7520e-04 - acc: 0.9877 - val_loss: 0.0016 - val_acc: 0.8866
+
+Epoch 00303: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 304/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.6136e-04 - acc: 0.9884 - val_loss: 0.0016 - val_acc: 0.8876
+
+Epoch 00304: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 305/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.6722e-04 - acc: 0.9883 - val_loss: 0.0015 - val_acc: 0.8913
+
+Epoch 00305: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 306/500
+476/476 [==============================] - 331s 695ms/step - loss: 1.7294e-04 - acc: 0.9879 - val_loss: 0.0015 - val_acc: 0.8908
+
+Epoch 00306: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 307/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.8008e-04 - acc: 0.9877 - val_loss: 0.0016 - val_acc: 0.8923
+
+Epoch 00307: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 308/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.6261e-04 - acc: 0.9891 - val_loss: 0.0015 - val_acc: 0.8918
+
+Epoch 00308: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 309/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.5769e-04 - acc: 0.9890 - val_loss: 0.0015 - val_acc: 0.8908
+
+Epoch 00309: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 310/500
+476/476 [==============================] - 331s 696ms/step - loss: 1.7311e-04 - acc: 0.9875 - val_loss: 0.0015 - val_acc: 0.8913
+
+Epoch 00310: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 311/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.7627e-04 - acc: 0.9877 - val_loss: 0.0014 - val_acc: 0.9007
+
+Epoch 00311: saving model to ./models/one_network_scratch-101-8frs0.90.h5
+Epoch 312/500
+476/476 [==============================] - 329s 692ms/step - loss: 1.5945e-04 - acc: 0.9891 - val_loss: 0.0016 - val_acc: 0.8871
+
+Epoch 00312: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 313/500
+476/476 [==============================] - 329s 692ms/step - loss: 1.6545e-04 - acc: 0.9881 - val_loss: 0.0016 - val_acc: 0.8813
+
+Epoch 00313: saving model to ./models/one_network_scratch-101-8frs0.88.h5
+Epoch 314/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.4699e-04 - acc: 0.9902 - val_loss: 0.0016 - val_acc: 0.8913
+
+Epoch 00314: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 315/500
+476/476 [==============================] - 330s 694ms/step - loss: 1.4292e-04 - acc: 0.9902 - val_loss: 0.0015 - val_acc: 0.8913
+
+Epoch 00315: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+Epoch 316/500
+476/476 [==============================] - 330s 694ms/step - loss: 1.6227e-04 - acc: 0.9890 - val_loss: 0.0015 - val_acc: 0.8965
+
+Epoch 00316: saving model to ./models/one_network_scratch-101-8frs0.90.h5
+Epoch 317/500
+476/476 [==============================] - 330s 693ms/step - loss: 1.6424e-04 - acc: 0.9879 - val_loss: 0.0016 - val_acc: 0.8855
+
+Epoch 00317: saving model to ./models/one_network_scratch-101-8frs0.89.h5
+
+=============================================================16frs===================================================
+
+
+Epoch 00131: saving model to ./models/one_network_scratch-101-16frs0.82.h5
+Epoch 132/500
+476/476 [==============================] - 628s 1s/step - loss: 9.6281e-04 - acc: 0.9309 - val_loss: 0.0025 - val_acc: 0.8146
+
+Epoch 00132: saving model to ./models/one_network_scratch-101-16frs0.81.h5
+Epoch 133/500
+476/476 [==============================] - 628s 1s/step - loss: 9.2099e-04 - acc: 0.9337 - val_loss: 0.0022 - val_acc: 0.8330
+
+Epoch 00133: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 134/500
+476/476 [==============================] - 630s 1s/step - loss: 9.1445e-04 - acc: 0.9353 - val_loss: 0.0024 - val_acc: 0.8235
+
+Epoch 00134: saving model to ./models/one_network_scratch-101-16frs0.82.h5
+Epoch 135/500
+476/476 [==============================] - 628s 1s/step - loss: 8.7271e-04 - acc: 0.9382 - val_loss: 0.0024 - val_acc: 0.8256
+
+Epoch 00135: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 136/500
+476/476 [==============================] - 628s 1s/step - loss: 8.9385e-04 - acc: 0.9350 - val_loss: 0.0025 - val_acc: 0.8204
+
+Epoch 00136: saving model to ./models/one_network_scratch-101-16frs0.82.h5
+Epoch 137/500
+476/476 [==============================] - 628s 1s/step - loss: 8.6268e-04 - acc: 0.9378 - val_loss: 0.0023 - val_acc: 0.8293
+
+Epoch 00137: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 138/500
+476/476 [==============================] - 628s 1s/step - loss: 8.4598e-04 - acc: 0.9401 - val_loss: 0.0023 - val_acc: 0.8346
+
+Epoch 00138: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 139/500
+476/476 [==============================] - 629s 1s/step - loss: 8.0651e-04 - acc: 0.9418 - val_loss: 0.0024 - val_acc: 0.8267
+
+Epoch 00139: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 140/500
+476/476 [==============================] - 628s 1s/step - loss: 8.0710e-04 - acc: 0.9412 - val_loss: 0.0024 - val_acc: 0.8283
+
+Epoch 00140: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 141/500
+476/476 [==============================] - 627s 1s/step - loss: 8.1309e-04 - acc: 0.9417 - val_loss: 0.0023 - val_acc: 0.8367
+
+Epoch 00141: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 142/500
+476/476 [==============================] - 629s 1s/step - loss: 7.7224e-04 - acc: 0.9441 - val_loss: 0.0024 - val_acc: 0.8199
+
+Epoch 00142: saving model to ./models/one_network_scratch-101-16frs0.82.h5
+Epoch 143/500
+476/476 [==============================] - 628s 1s/step - loss: 7.9399e-04 - acc: 0.9433 - val_loss: 0.0023 - val_acc: 0.8356
+
+Epoch 00143: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 144/500
+476/476 [==============================] - 629s 1s/step - loss: 7.8591e-04 - acc: 0.9434 - val_loss: 0.0023 - val_acc: 0.8393
+
+Epoch 00144: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 145/500
+476/476 [==============================] - 628s 1s/step - loss: 7.7040e-04 - acc: 0.9439 - val_loss: 0.0023 - val_acc: 0.8325
+
+Epoch 00145: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 146/500
+476/476 [==============================] - 628s 1s/step - loss: 7.3595e-04 - acc: 0.9471 - val_loss: 0.0023 - val_acc: 0.8319
+
+Epoch 00146: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 147/500
+476/476 [==============================] - 629s 1s/step - loss: 7.4840e-04 - acc: 0.9464 - val_loss: 0.0023 - val_acc: 0.8309
+
+Epoch 00147: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 148/500
+476/476 [==============================] - 629s 1s/step - loss: 7.0109e-04 - acc: 0.9494 - val_loss: 0.0023 - val_acc: 0.8325
+
+Epoch 00148: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 149/500
+476/476 [==============================] - 627s 1s/step - loss: 7.1139e-04 - acc: 0.9485 - val_loss: 0.0022 - val_acc: 0.8372
+
+Epoch 00149: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 150/500
+476/476 [==============================] - 629s 1s/step - loss: 7.1682e-04 - acc: 0.9481 - val_loss: 0.0023 - val_acc: 0.8309
+
+Epoch 00150: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 151/500
+476/476 [==============================] - 628s 1s/step - loss: 6.9204e-04 - acc: 0.9508 - val_loss: 0.0023 - val_acc: 0.8377
+
+Epoch 00151: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 152/500
+476/476 [==============================] - 628s 1s/step - loss: 7.0212e-04 - acc: 0.9492 - val_loss: 0.0023 - val_acc: 0.8330
+
+Epoch 00152: saving model to ./models/one_network_scratch-101-16frs0.83.h5
+Epoch 153/500
+476/476 [==============================] - 628s 1s/step - loss: 6.8111e-04 - acc: 0.9512 - val_loss: 0.0022 - val_acc: 0.8430
+
+Epoch 00153: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 154/500
+476/476 [==============================] - 629s 1s/step - loss: 7.0693e-04 - acc: 0.9483 - val_loss: 0.0023 - val_acc: 0.8356
+
+Epoch 00154: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 155/500
+476/476 [==============================] - 628s 1s/step - loss: 6.3875e-04 - acc: 0.9538 - val_loss: 0.0022 - val_acc: 0.8487
+
+Epoch 00155: saving model to ./models/one_network_scratch-101-16frs0.85.h5
+Epoch 156/500
+476/476 [==============================] - 629s 1s/step - loss: 6.7852e-04 - acc: 0.9517 - val_loss: 0.0022 - val_acc: 0.8398
+
+Epoch 00156: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 157/500
+476/476 [==============================] - 628s 1s/step - loss: 6.4179e-04 - acc: 0.9531 - val_loss: 0.0021 - val_acc: 0.8482
+
+Epoch 00157: saving model to ./models/one_network_scratch-101-16frs0.85.h5
+Epoch 158/500
+476/476 [==============================] - 630s 1s/step - loss: 6.4480e-04 - acc: 0.9537 - val_loss: 0.0021 - val_acc: 0.8456
+
+Epoch 00158: saving model to ./models/one_network_scratch-101-16frs0.85.h5
+Epoch 159/500
+476/476 [==============================] - 629s 1s/step - loss: 6.3759e-04 - acc: 0.9551 - val_loss: 0.0021 - val_acc: 0.8487
+
+Epoch 00159: saving model to ./models/one_network_scratch-101-16frs0.85.h5
+Epoch 160/500
+476/476 [==============================] - 628s 1s/step - loss: 6.4706e-04 - acc: 0.9530 - val_loss: 0.0022 - val_acc: 0.8424
+
+Epoch 00160: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 161/500
+476/476 [==============================] - 629s 1s/step - loss: 6.5671e-04 - acc: 0.9515 - val_loss: 0.0022 - val_acc: 0.8388
+
+Epoch 00161: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 162/500
+476/476 [==============================] - 629s 1s/step - loss: 5.9700e-04 - acc: 0.9558 - val_loss: 0.0022 - val_acc: 0.8351
+
+Epoch 00162: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 163/500
+476/476 [==============================] - 630s 1s/step - loss: 5.9100e-04 - acc: 0.9572 - val_loss: 0.0021 - val_acc: 0.8466
+
+Epoch 00163: saving model to ./models/one_network_scratch-101-16frs0.85.h5
+Epoch 164/500
+476/476 [==============================] - 629s 1s/step - loss: 5.9723e-04 - acc: 0.9577 - val_loss: 0.0020 - val_acc: 0.8556
+
+Epoch 00164: saving model to ./models/one_network_scratch-101-16frs0.86.h5
+Epoch 165/500
+476/476 [==============================] - 630s 1s/step - loss: 6.1748e-04 - acc: 0.9540 - val_loss: 0.0022 - val_acc: 0.8445
+
+Epoch 00165: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 166/500
+476/476 [==============================] - 628s 1s/step - loss: 5.7960e-04 - acc: 0.9564 - val_loss: 0.0022 - val_acc: 0.8382
+
+Epoch 00166: saving model to ./models/one_network_scratch-101-16frs0.84.h5
+Epoch 167/500
+476/476 [==============================] - 626s 1s/step - loss: 5.8092e-04 - acc: 0.9575 - val_loss: 0.0021 - val_acc: 0.8498
+
+Epoch 00167: saving model to ./models/one_network_scratch-101-16frs0.85.h5
+
+=============================================================crop 64===========================================================
+
+
+Epoch 00380: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 381/500
+476/476 [==============================] - 235s 493ms/step - loss: 3.1929e-04 - acc: 0.9751 - val_loss: 0.0028 - val_acc: 0.8078
+
+Epoch 00381: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 382/500
+476/476 [==============================] - 233s 490ms/step - loss: 3.2152e-04 - acc: 0.9749 - val_loss: 0.0029 - val_acc: 0.8046
+
+Epoch 00382: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 383/500
+476/476 [==============================] - 237s 498ms/step - loss: 3.3189e-04 - acc: 0.9739 - val_loss: 0.0030 - val_acc: 0.7931
+
+Epoch 00383: saving model to ./models/one_network_scratch-101-16-crop64-frs0.79.h5
+Epoch 384/500
+476/476 [==============================] - 236s 496ms/step - loss: 3.2953e-04 - acc: 0.9735 - val_loss: 0.0029 - val_acc: 0.8020
+
+Epoch 00384: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 385/500
+476/476 [==============================] - 235s 493ms/step - loss: 3.1590e-04 - acc: 0.9752 - val_loss: 0.0029 - val_acc: 0.8030
+
+Epoch 00385: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 386/500
+476/476 [==============================] - 237s 498ms/step - loss: 3.1164e-04 - acc: 0.9748 - val_loss: 0.0029 - val_acc: 0.7973
+
+Epoch 00386: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 387/500
+476/476 [==============================] - 235s 494ms/step - loss: 3.1961e-04 - acc: 0.9754 - val_loss: 0.0030 - val_acc: 0.7931
+
+Epoch 00387: saving model to ./models/one_network_scratch-101-16-crop64-frs0.79.h5
+Epoch 388/500
+476/476 [==============================] - 236s 496ms/step - loss: 3.1426e-04 - acc: 0.9754 - val_loss: 0.0028 - val_acc: 0.8072
+
+Epoch 00388: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 389/500
+476/476 [==============================] - 236s 495ms/step - loss: 3.0722e-04 - acc: 0.9754 - val_loss: 0.0028 - val_acc: 0.8009
+
+Epoch 00389: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 390/500
+476/476 [==============================] - 235s 493ms/step - loss: 3.2500e-04 - acc: 0.9748 - val_loss: 0.0028 - val_acc: 0.8083
+
+Epoch 00390: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 391/500
+476/476 [==============================] - 236s 497ms/step - loss: 3.2563e-04 - acc: 0.9751 - val_loss: 0.0028 - val_acc: 0.8104
+
+Epoch 00391: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 392/500
+476/476 [==============================] - 235s 493ms/step - loss: 3.1048e-04 - acc: 0.9752 - val_loss: 0.0029 - val_acc: 0.8020
+
+Epoch 00392: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 393/500
+476/476 [==============================] - 237s 497ms/step - loss: 3.0611e-04 - acc: 0.9762 - val_loss: 0.0028 - val_acc: 0.7994
+
+Epoch 00393: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 394/500
+476/476 [==============================] - 236s 496ms/step - loss: 3.0643e-04 - acc: 0.9761 - val_loss: 0.0027 - val_acc: 0.8099
+
+Epoch 00394: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 395/500
+476/476 [==============================] - 235s 494ms/step - loss: 3.0977e-04 - acc: 0.9754 - val_loss: 0.0029 - val_acc: 0.7941
+
+Epoch 00395: saving model to ./models/one_network_scratch-101-16-crop64-frs0.79.h5
+Epoch 396/500
+476/476 [==============================] - 235s 495ms/step - loss: 3.1643e-04 - acc: 0.9757 - val_loss: 0.0030 - val_acc: 0.7946
+
+Epoch 00396: saving model to ./models/one_network_scratch-101-16-crop64-frs0.79.h5
+Epoch 397/500
+476/476 [==============================] - 236s 496ms/step - loss: 2.8337e-04 - acc: 0.9774 - val_loss: 0.0027 - val_acc: 0.8072
+
+Epoch 00397: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 398/500
+476/476 [==============================] - 237s 497ms/step - loss: 2.8243e-04 - acc: 0.9775 - val_loss: 0.0028 - val_acc: 0.8057
+
+Epoch 00398: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 399/500
+476/476 [==============================] - 238s 500ms/step - loss: 3.1540e-04 - acc: 0.9751 - val_loss: 0.0028 - val_acc: 0.8088
+
+Epoch 00399: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 400/500
+476/476 [==============================] - 236s 497ms/step - loss: 2.9411e-04 - acc: 0.9769 - val_loss: 0.0028 - val_acc: 0.8051
+
+Epoch 00400: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 401/500
+476/476 [==============================] - 237s 497ms/step - loss: 2.8684e-04 - acc: 0.9770 - val_loss: 0.0028 - val_acc: 0.8062
+
+Epoch 00401: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 402/500
+476/476 [==============================] - 236s 496ms/step - loss: 2.9181e-04 - acc: 0.9772 - val_loss: 0.0028 - val_acc: 0.8046
+
+Epoch 00402: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 403/500
+476/476 [==============================] - 237s 497ms/step - loss: 2.9605e-04 - acc: 0.9769 - val_loss: 0.0028 - val_acc: 0.8041
+
+Epoch 00403: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 404/500
+476/476 [==============================] - 236s 496ms/step - loss: 2.9988e-04 - acc: 0.9757 - val_loss: 0.0029 - val_acc: 0.7962
+
+Epoch 00404: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 405/500
+476/476 [==============================] - 238s 499ms/step - loss: 3.1029e-04 - acc: 0.9757 - val_loss: 0.0029 - val_acc: 0.7994
+
+Epoch 00405: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 406/500
+476/476 [==============================] - 237s 499ms/step - loss: 2.8822e-04 - acc: 0.9772 - val_loss: 0.0029 - val_acc: 0.7999
+
+Epoch 00406: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 407/500
+476/476 [==============================] - 240s 503ms/step - loss: 3.0381e-04 - acc: 0.9765 - val_loss: 0.0028 - val_acc: 0.8004
+
+Epoch 00407: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 408/500
+476/476 [==============================] - 238s 500ms/step - loss: 3.0466e-04 - acc: 0.9764 - val_loss: 0.0028 - val_acc: 0.8025
+
+Epoch 00408: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 409/500
+476/476 [==============================] - 237s 497ms/step - loss: 2.7495e-04 - acc: 0.9781 - val_loss: 0.0028 - val_acc: 0.8009
+
+Epoch 00409: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 410/500
+476/476 [==============================] - 238s 500ms/step - loss: 2.9787e-04 - acc: 0.9766 - val_loss: 0.0028 - val_acc: 0.7988
+
+Epoch 00410: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 411/500
+476/476 [==============================] - 237s 498ms/step - loss: 2.7915e-04 - acc: 0.9778 - val_loss: 0.0027 - val_acc: 0.8136
+
+Epoch 00411: saving model to ./models/one_network_scratch-101-16-crop64-frs0.81.h5
+Epoch 412/500
+476/476 [==============================] - 237s 499ms/step - loss: 2.9133e-04 - acc: 0.9773 - val_loss: 0.0028 - val_acc: 0.8041
+
+Epoch 00412: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 413/500
+476/476 [==============================] - 237s 498ms/step - loss: 2.8756e-04 - acc: 0.9766 - val_loss: 0.0030 - val_acc: 0.7936
+
+Epoch 00413: saving model to ./models/one_network_scratch-101-16-crop64-frs0.79.h5
+Epoch 414/500
+476/476 [==============================] - 237s 498ms/step - loss: 2.9594e-04 - acc: 0.9766 - val_loss: 0.0028 - val_acc: 0.8009
+
+Epoch 00414: saving model to ./models/one_network_scratch-101-16-crop64-frs0.80.h5
+Epoch 415/500
+476/476 [==============================] - 236s 496ms/step - loss: 2.9838e-04 - acc: 0.9766 - val_loss: 0.0030 - val_acc: 0.7936
+
+Epoch 00415: saving model to ./models/one_network_scratch-101-16-crop64-frs0.79.h5
+Epoch 416/500
+476/476 [==============================] - 235s 494ms/step - loss: 2.9550e-04 - acc: 0.9770 - val_loss: 0.0028 - val_acc: 0.8041
