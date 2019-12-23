@@ -1,7 +1,7 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 # The GPU id to use, usually either "0" or "1";
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "3"
 
 import keras.backend as K
 from keras.models import Model, Sequential, model_from_json
@@ -26,7 +26,7 @@ NUM_EPOCHS = 500
 CROP_SIZE = 112
 C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
-MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
+MODEL_JSON_FILENAME = './models/sports1M_weights_8_tf_notop.json'
 VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
 MODEL_WEIGHT_FILENAME = './models/sports1M_weights_tf.h5'
 PRETRAINED_VIDEO_MODEL = cfg['PRETRAINED_VIDEO_MODEL']
@@ -159,7 +159,7 @@ def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
     filepath = "./models/one_network_scratch-"+str(NUM_OF_CLASSES)+"-"+str(NUM_OF_FRAMES)+"frs{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/{}/500-scratch-{}frs/".format(NUM_OF_CLASSES, NUM_OF_FRAMES)
+    log_dir = "./one_network_logs/{}/500-pretrained-{}frs/".format(NUM_OF_CLASSES, NUM_OF_FRAMES)
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(

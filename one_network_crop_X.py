@@ -1,7 +1,7 @@
 import os
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 # The GPU id to use, usually either "0" or "1";
-os.environ["CUDA_VISIBLE_DEVICES"] = "2"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 
 import keras.backend as K
 from keras.models import Model, Sequential, model_from_json
@@ -12,7 +12,7 @@ from keras.optimizers import SGD
 import numpy as np
 from sklearn.model_selection import train_test_split
 from configuration import cfg
-from video_image_data_generator import VideoImageDataGenerator
+from video_image_data_generator_crop_X import VideoImageDataGenerator
 from keras.callbacks import ModelCheckpoint
 from keras.callbacks import TensorBoard
 
@@ -23,9 +23,9 @@ NUM_OF_CLASSES = cfg['NUM_OF_CLASSES']
 BATCH_SIZE = 16
 NUM_OF_FRAMES = cfg['NUM_OF_FRAMES']
 NUM_EPOCHS = 500
-CROP_SIZE = 112
-C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 112, 112, 3)
-STATIC_INPUT_SHAPE = (112, 112, 3)
+CROP_SIZE = 64
+C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 64, 64, 3)
+STATIC_INPUT_SHAPE = (64, 64, 3)
 MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
 VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
 MODEL_WEIGHT_FILENAME = './models/sports1M_weights_tf.h5'
@@ -88,7 +88,8 @@ def init_generators():
         n_channels=3,
         n_classes=len(set(train_labels.values())),
         static_dim=STATIC_INPUT_SHAPE,
-        num_of_frames=NUM_OF_FRAMES)
+        num_of_frames=NUM_OF_FRAMES,
+        to_crop=True)
 
     validation_datagen = VideoImageDataGenerator(
         list_IDs=validation_ids,
@@ -100,7 +101,8 @@ def init_generators():
         n_channels=3,
         n_classes=len(set(train_labels.values())),
         static_dim=STATIC_INPUT_SHAPE,
-        num_of_frames=NUM_OF_FRAMES)
+        num_of_frames=NUM_OF_FRAMES,
+        to_crop=True)
 
     return train_datagen, validation_datagen
 
@@ -109,7 +111,7 @@ def build_static_model():
     base_model = ResNet50(
         weights='imagenet',
         include_top=False,
-        input_shape=(CROP_SIZE, CROP_SIZE, 3))
+        input_shape=STATIC_INPUT_SHAPE)
     x = base_model.output
     x = Flatten(name='flatten')(x)
     model = Model(inputs=base_model.input, outputs=x)
@@ -158,8 +160,8 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-"+str(NUM_OF_CLASSES)+"-"+str(NUM_OF_FRAMES)+"frs{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/{}/500-scratch-{}frs/".format(NUM_OF_CLASSES, NUM_OF_FRAMES)
+    filepath = "./models/one_network_scratch-"+str(NUM_OF_CLASSES)+"-"+str(NUM_OF_FRAMES)+"-crop"+str(CROP_SIZE)+"-frs{val_acc:.2f}.h5"
+    log_dir = "./one_network_logs/{}/500-scratch-{}frs-crop{}/".format(NUM_OF_CLASSES, NUM_OF_FRAMES, CROP_SIZE)
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
