@@ -27,7 +27,7 @@ CROP_SIZE = 112
 C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
 MODEL_JSON_FILENAME = './models/sports1M_weights_8_tf_notop.json'
-VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
+VIDEO_MODEL_TOP = './models/c3d_model.json'
 MODEL_WEIGHT_FILENAME = './models/sports1M_weights_tf.h5'
 PRETRAINED_VIDEO_MODEL = cfg['PRETRAINED_VIDEO_MODEL']
 

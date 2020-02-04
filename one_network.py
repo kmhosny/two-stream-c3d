@@ -26,8 +26,8 @@ NUM_EPOCHS = 500
 CROP_SIZE = 112
 C3D_INPUT_SHAPE = (NUM_OF_FRAMES, 112, 112, 3)
 STATIC_INPUT_SHAPE = (112, 112, 3)
-MODEL_JSON_FILENAME = './models/sports1M_weights_tf_notop.json'
-VIDEO_MODEL_TOP = './models/sports1M_weights_tf.json'
+MODEL_JSON_FILENAME = './models/c3d_model_no_top.json'
+VIDEO_MODEL_TOP = './models/c3d_model.json'
 MODEL_WEIGHT_FILENAME = './models/sports1M_weights_tf.h5'
 PRETRAINED_VIDEO_MODEL = cfg['PRETRAINED_VIDEO_MODEL']
 
@@ -158,8 +158,10 @@ merge_technique = {0: vec_avg}
 def main():
     model = deep_model()
     train_generator, validation_generator = init_generators()
-    filepath = "./models/one_network_scratch-"+str(NUM_OF_CLASSES)+"-"+str(NUM_OF_FRAMES)+"frs{val_acc:.2f}.h5"
-    log_dir = "./one_network_logs/{}/500-scratch-{}frs/".format(NUM_OF_CLASSES, NUM_OF_FRAMES)
+    filepath = "./models/one_network_scratch-" + str(
+        NUM_OF_CLASSES) + "-" + str(NUM_OF_FRAMES) + "frs{val_acc:.2f}.h5"
+    log_dir = "./one_network_logs/{}/500-scratch-{}frs/".format(
+        NUM_OF_CLASSES, NUM_OF_FRAMES)
     checkpoint = ModelCheckpoint(
         filepath, monitor="val_acc", verbose=1, mode='max')
     board = TensorBoard(
