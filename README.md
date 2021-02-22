@@ -1,5 +1,5 @@
 # 3D convolution with two-stream convNet for Human Action Recognition
-this code is part of submitted thesis under the title 3D convolution with two-stream convNet for Human Action Recognition. it uses two-streams convolutional network to perform human action recognition, it consists of 2 streams, 1 spatial using ResNet50 and 1 temporal using C3D network.
+this code is part of submitted thesis under the title 3D convolution with two-stream convNet for Human Action Recognition at The American University in Cairo (AUC). it uses two-streams convolutional network to perform human action recognition, it consists of 2 streams, 1 spatial using ResNet50 and 1 temporal using C3D network.
 it uses Tensorflow 1.13.1 and Keras 2.2.4.
 
 This code uses some source code published by https://github.com/hx173149/C3D-tensorflow/ mainly the input_data.py and uses the exported C3D JSON model converted from caffe to tensorflow keras by https://github.com/axon-research/c3d-keras.
